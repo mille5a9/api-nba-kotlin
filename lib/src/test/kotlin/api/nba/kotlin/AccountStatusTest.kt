@@ -47,7 +47,7 @@ class AccountStatusTest {
         apiNbaClient = ApiNbaClient(
             "host",
             "undefined",
-            MockEngine { request ->
+            MockEngine { _ ->
                 respond(
                     content = ByteReadChannel("""
                         {"get":"status","parameters":[],"errors":[],"results":0,"paging":{"current":1,"total":1},"response":{"account":{"firstname":"John","lastname":"Smith","email":"test@gmail.com"},"subscription":{"plan":"Free","end":"2024-12-20T00:00:00+00:00","active":true},"requests":{"current":0,"limit_day":100}}}
