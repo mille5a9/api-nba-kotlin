@@ -1,5 +1,7 @@
 package api.nba.kotlin
 
+import api.nba.kotlin.responses.LeaguesResponse
+import api.nba.kotlin.responses.SeasonsResponse
 import api.nba.kotlin.responses.StatusResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -27,5 +29,9 @@ class ApiNbaClient(
             header("x-rapidapi-key", key)
         }.body<T>()
 
-    suspend fun accountStatus() = get<StatusResponse>("/status")
+    suspend fun getAccountStatus() = get<StatusResponse>("/status")
+
+    suspend fun getSeasons() = get<SeasonsResponse>("/seasons")
+
+    suspend fun getLeagues() = get<LeaguesResponse>("/leagues")
 }
