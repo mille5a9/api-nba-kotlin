@@ -11,7 +11,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -43,8 +42,8 @@ class AccountStatusTest {
         ),
     )
 
-    @BeforeEach
-    fun setup() {
+    @Test
+    fun accountStatusReturns200(): Unit = runBlocking {
         apiNbaClient = ApiNbaClient(
             "host",
             "undefined",
@@ -58,11 +57,7 @@ class AccountStatusTest {
                 )
             }
         )
-    }
-
-    @Test
-    fun accountStatusReturns200(): Unit = runBlocking {
-        val response = apiNbaClient.accountStatus()
+        val response = apiNbaClient.getAccountStatus()
         assertEquals(response, expected)
     }
 }
