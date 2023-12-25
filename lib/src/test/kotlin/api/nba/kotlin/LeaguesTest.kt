@@ -1,7 +1,6 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.responses.LeaguesResponse
-import api.nba.kotlin.responses.SeasonsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
@@ -9,13 +8,12 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class LeaguesTest {
 
-    private lateinit var apiNbaClient: ApiNbaClient
+    private lateinit var apiNbaInternalClient: ApiNbaInternalClient
 
     private val expected: LeaguesResponse = LeaguesResponse(
         "leagues/",
@@ -27,7 +25,7 @@ class LeaguesTest {
 
     @Test
     fun seasonsReturns200(): Unit = runBlocking {
-        apiNbaClient = ApiNbaClient(
+        apiNbaInternalClient = ApiNbaInternalClient(
             "host",
             "undefined",
             MockEngine { _ ->
@@ -40,7 +38,7 @@ class LeaguesTest {
                 )
             }
         )
-        val response = apiNbaClient.getLeagues()
+        val response = apiNbaInternalClient.getLeagues()
         assertEquals(response, expected)
     }
 }

@@ -8,13 +8,12 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class SeasonsTest {
 
-    private lateinit var apiNbaClient: ApiNbaClient
+    private lateinit var apiNbaInternalClient: ApiNbaInternalClient
 
     private val expected: SeasonsResponse = SeasonsResponse(
         "seasons/",
@@ -26,7 +25,7 @@ class SeasonsTest {
 
     @Test
     fun seasonsReturns200(): Unit = runBlocking {
-        apiNbaClient = ApiNbaClient(
+        apiNbaInternalClient = ApiNbaInternalClient(
             "host",
             "undefined",
             MockEngine { _ ->
@@ -39,7 +38,7 @@ class SeasonsTest {
                 )
             }
         )
-        val response = apiNbaClient.getSeasons()
+        val response = apiNbaInternalClient.getSeasons()
         assertEquals(response, expected)
     }
 }

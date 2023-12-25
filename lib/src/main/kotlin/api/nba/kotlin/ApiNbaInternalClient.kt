@@ -28,7 +28,7 @@ import io.ktor.client.request.url
 import io.ktor.serialization.kotlinx.json.json
 
 
-class ApiNbaClient(
+class ApiNbaInternalClient(
     private val host: String,
     private val key: String,
     httpClientEngine: HttpClientEngine? = null,

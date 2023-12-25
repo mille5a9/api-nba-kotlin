@@ -16,7 +16,7 @@ import kotlin.test.assertEquals
 
 class AccountStatusTest {
 
-    private lateinit var apiNbaClient: ApiNbaClient
+    private lateinit var apiNbaInternalClient: ApiNbaInternalClient
 
     private val expected: StatusResponse = StatusResponse(
         "status",
@@ -44,7 +44,7 @@ class AccountStatusTest {
 
     @Test
     fun accountStatusReturns200(): Unit = runBlocking {
-        apiNbaClient = ApiNbaClient(
+        apiNbaInternalClient = ApiNbaInternalClient(
             "host",
             "undefined",
             MockEngine { _ ->
@@ -57,7 +57,7 @@ class AccountStatusTest {
                 )
             }
         )
-        val response = apiNbaClient.getAccountStatus()
+        val response = apiNbaInternalClient.getAccountStatus()
         assertEquals(response, expected)
     }
 }

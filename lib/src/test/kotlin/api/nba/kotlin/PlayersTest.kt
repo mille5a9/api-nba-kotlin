@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 
 class PlayersTest {
 
-    private lateinit var apiNbaClient: ApiNbaClient
+    private lateinit var apiNbaInternalClient: ApiNbaInternalClient
 
     private val expected: PlayersResponse = PlayersResponse(
         "players/",
@@ -46,7 +46,7 @@ class PlayersTest {
 
     @Test
     fun playersReturns200(): Unit = runBlocking {
-        apiNbaClient = ApiNbaClient(
+        apiNbaInternalClient = ApiNbaInternalClient(
             "host",
             "undefined",
             MockEngine { _ ->
@@ -99,7 +99,7 @@ class PlayersTest {
                 )
             }
         )
-        val response = apiNbaClient.getPlayers(PlayersParams(id = 553))
+        val response = apiNbaInternalClient.getPlayers(PlayersParams(id = 553))
         assertEquals(response, expected)
     }
 }
