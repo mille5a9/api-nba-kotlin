@@ -5,8 +5,8 @@ class TeamsParams(
     private val name: String? = null,
     private val code: String? = null,
     private val league: String? = null,
-    private val conference: Int? = null,
-    private val division: Int? = null,
+    private val conference: String? = null,
+    private val division: String? = null,
     private val search: String? = null,
 ) : EndpointParams {
     override fun getParams(): Map<String, String?> = mapOf(
@@ -14,8 +14,8 @@ class TeamsParams(
         "name" to name,
         "code" to code,
         "league" to league,
-        "conference" to conference?.toString(),
-        "division" to division?.toString(),
+        "conference" to conference,
+        "division" to division,
         "search" to search,
     )
 }
