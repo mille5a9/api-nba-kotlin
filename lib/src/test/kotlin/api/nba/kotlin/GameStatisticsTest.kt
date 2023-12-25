@@ -1,5 +1,6 @@
 package api.nba.kotlin
 
+import api.nba.kotlin.models.GameStatistics
 import api.nba.kotlin.responses.GamesStatisticsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -30,7 +31,7 @@ class GameStatisticsTest {
                     "https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png"
                 ),
                 listOf(
-                    GamesStatisticsResponse.Statistics(
+                    GameStatistics(
                         15,
                         70,
                         28,
@@ -69,7 +70,7 @@ class GameStatisticsTest {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_of_the_Detroit_Pistons.png/300px-Logo_of_the_Detroit_Pistons.png"
                 ),
                 listOf(
-                    GamesStatisticsResponse.Statistics(
+                    GameStatistics(
                         8,
                         52,
                         2,
