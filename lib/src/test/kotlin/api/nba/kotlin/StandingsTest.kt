@@ -1,5 +1,6 @@
 package api.nba.kotlin
 
+import api.nba.kotlin.models.Team
 import api.nba.kotlin.params.StandingsParams
 import api.nba.kotlin.responses.StandingsResponse
 import io.ktor.client.engine.mock.MockEngine
@@ -25,7 +26,7 @@ class StandingsTest {
             StandingsResponse.Standing(
                 "standard",
                 2021,
-                StandingsResponse.Team(
+                Team(
                     1,
                     "Atlanta Hawks",
                     "Hawks",

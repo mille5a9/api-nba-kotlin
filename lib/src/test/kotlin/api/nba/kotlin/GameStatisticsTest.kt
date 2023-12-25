@@ -1,6 +1,7 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.models.GameStatistics
+import api.nba.kotlin.models.Team
 import api.nba.kotlin.responses.GamesStatisticsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -23,7 +24,7 @@ class GameStatisticsTest {
         2,
         listOf(
             GamesStatisticsResponse.TeamStats(
-                GamesStatisticsResponse.Team(
+                Team(
                     5,
                     "Charlotte Hornets",
                     "Hornets",
@@ -62,7 +63,7 @@ class GameStatisticsTest {
                 )
             ),
             GamesStatisticsResponse.TeamStats(
-                GamesStatisticsResponse.Team(
+                Team(
                     10,
                     "Detroit Pistons",
                     "Pistons",

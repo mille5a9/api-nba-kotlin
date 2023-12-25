@@ -1,6 +1,7 @@
 package api.nba.kotlin.responses
 
 import api.nba.kotlin.models.GameStatistics
+import api.nba.kotlin.models.Team
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,14 +16,5 @@ data class GamesStatisticsResponse(
     data class TeamStats(
         val team: Team,
         val statistics: List<GameStatistics>,
-    )
-
-    @Serializable
-    data class Team(
-        val id: Int,
-        val name: String,
-        val nickname: String,
-        val code: String,
-        val logo: String,
     )
 }

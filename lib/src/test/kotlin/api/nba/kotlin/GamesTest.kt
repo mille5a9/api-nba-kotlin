@@ -1,5 +1,6 @@
 package api.nba.kotlin
 
+import api.nba.kotlin.models.Team
 import api.nba.kotlin.params.GamesParams
 import api.nba.kotlin.responses.GamesResponse
 import io.ktor.client.engine.mock.MockEngine
@@ -50,14 +51,14 @@ class GamesTest {
                     "USA"
                 ),
                 GamesResponse.Teams(
-                    GamesResponse.Team(
+                    Team(
                         7,
                         "Cleveland Cavaliers",
                         "Cavaliers",
                         "CLE",
                         "https://upload.wikimedia.org/wikipedia/fr/thumb/0/06/Cavs_de_Cleveland_logo_2017.png/150px-Cavs_de_Cleveland_logo_2017.png"
                     ),
-                    GamesResponse.Team(
+                    Team(
                         15,
                         "Indiana Pacers",
                         "Pacers",

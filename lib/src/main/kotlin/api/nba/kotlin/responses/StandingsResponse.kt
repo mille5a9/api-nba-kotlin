@@ -1,5 +1,6 @@
 package api.nba.kotlin.responses
 
+import api.nba.kotlin.models.Team
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -23,15 +24,6 @@ data class StandingsResponse(
         val streak: Int,
         val winStreak: Boolean,
         val tieBreakerPoints: Int?,
-    )
-
-    @Serializable
-    data class Team(
-        val id: Int,
-        val name: String,
-        val nickname: String,
-        val code: String,
-        val logo: String,
     )
 
     @Serializable
