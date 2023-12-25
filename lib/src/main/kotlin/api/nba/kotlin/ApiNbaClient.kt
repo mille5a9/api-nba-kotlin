@@ -3,11 +3,13 @@ package api.nba.kotlin
 import api.nba.kotlin.params.EndpointParams
 import api.nba.kotlin.params.GamesParams
 import api.nba.kotlin.params.PlayersParams
+import api.nba.kotlin.params.StandingsParams
 import api.nba.kotlin.params.TeamsParams
 import api.nba.kotlin.responses.GamesResponse
 import api.nba.kotlin.responses.LeaguesResponse
 import api.nba.kotlin.responses.PlayersResponse
 import api.nba.kotlin.responses.SeasonsResponse
+import api.nba.kotlin.responses.StandingsResponse
 import api.nba.kotlin.responses.StatusResponse
 import api.nba.kotlin.responses.TeamsResponse
 import io.ktor.client.HttpClient
@@ -51,4 +53,6 @@ class ApiNbaClient(
     suspend fun getTeams(params: TeamsParams) = get<TeamsResponse>("/teams", params)
 
     suspend fun getPlayers(params: PlayersParams) = get<PlayersResponse>("/players", params)
+
+    suspend fun getStandings(params: StandingsParams) = get<StandingsResponse>("/standings", params)
 }
