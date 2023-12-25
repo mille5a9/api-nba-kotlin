@@ -13,7 +13,7 @@ import kotlin.test.assertEquals
 
 class SeasonsTest {
 
-    private lateinit var apiNbaInternalClient: ApiNbaInternalClient
+    private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: SeasonsResponse = SeasonsResponse(
         "seasons/",
@@ -25,7 +25,7 @@ class SeasonsTest {
 
     @Test
     fun seasonsReturns200(): Unit = runBlocking {
-        apiNbaInternalClient = ApiNbaInternalClient(
+        apiNbaClient = ApiNbaClient(
             "host",
             "undefined",
             MockEngine { _ ->
@@ -38,7 +38,7 @@ class SeasonsTest {
                 )
             }
         )
-        val response = apiNbaInternalClient.getSeasons()
+        val response = apiNbaClient.getSeasons()
         assertEquals(response, expected)
     }
 }

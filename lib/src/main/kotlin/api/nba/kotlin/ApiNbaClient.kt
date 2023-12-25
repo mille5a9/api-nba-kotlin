@@ -1,7 +1,9 @@
 package api.nba.kotlin
 
+import api.nba.kotlin.enums.EndpointEnum
 import api.nba.kotlin.params.EndpointParams
 import api.nba.kotlin.params.GamesParams
+import api.nba.kotlin.params.GenericParams
 import api.nba.kotlin.params.PlayersParams
 import api.nba.kotlin.params.PlayersStatisticsParams
 import api.nba.kotlin.params.StandingsParams
@@ -28,7 +30,7 @@ import io.ktor.client.request.url
 import io.ktor.serialization.kotlinx.json.json
 
 
-class ApiNbaInternalClient(
+class ApiNbaClient(
     private val host: String,
     private val key: String,
     httpClientEngine: HttpClientEngine? = null,
@@ -38,7 +40,7 @@ class ApiNbaInternalClient(
     }
 
     private suspend inline fun <reified T> get(
-        endpoint: String,
+        endpoint: EndpointEnum,
         params: EndpointParams? = null,
     ) = httpClient.get {
         url("$host$endpoint")
@@ -46,25 +48,33 @@ class ApiNbaInternalClient(
         header("x-rapidapi-key", key)
     }.body<T>()
 
-    suspend fun getAccountStatus() = get<StatusResponse>("/status")
+    suspend fun getAccountStatus() =
+        get<StatusResponse>(EndpointEnum.STATUS)
 
-    suspend fun getSeasons() = get<SeasonsResponse>("/seasons")
+    suspend fun getSeasons() =
+        get<SeasonsResponse>(EndpointEnum.SEASONS)
 
-    suspend fun getLeagues() = get<LeaguesResponse>("/leagues")
+    suspend fun getLeagues() =
+        get<LeaguesResponse>(EndpointEnum.LEAGUES)
 
-    suspend fun getGames(params: GamesParams) = get<GamesResponse>("/games", params)
+    internal suspend fun getGames(params: GamesParams) =
+        get<GamesResponse>(EndpointEnum.GAMES, params)
 
-    suspend fun getTeams(params: TeamsParams) = get<TeamsResponse>("/teams", params)
+    internal suspend fun getTeams(params: TeamsParams) =
+        get<TeamsResponse>(EndpointEnum.TEAMS, params)
 
-    suspend fun getPlayers(params: PlayersParams) = get<PlayersResponse>("/players", params)
+    internal suspend fun getPlayers(params: PlayersParams) =
+        get<PlayersResponse>(EndpointEnum.PLAYERS, params)
 
-    suspend fun getStandings(params: StandingsParams) = get<StandingsResponse>("/standings", params)
+    internal suspend fun getStandings(params: StandingsParams) =
+        get<StandingsResponse>(EndpointEnum.STANDINGS, params)
 
-    suspend fun getGameStatistics(id: Int) = get<GamesStatisticsResponse>("/games/statistics?id=$id")
+    internal suspend fun getPlayerStatistics(params: PlayersStatisticsParams) =
+        get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, params)
+
+    suspend fun getGameStatistics(id: Int) =
+        get<GamesStatisticsResponse>(EndpointEnum.GAME_STATISTICS, GenericParams(id))
 
     suspend fun getTeamStatistics(id: Int, season: Int) =
-        get<TeamsStatisticsResponse>("/teams/statistics?id=$id&season=$season")
-
-    suspend fun getPlayerStatistics(params: PlayersStatisticsParams) =
-        get<PlayersStatisticsResponse>("/players/statistics", params)
+        get<TeamsStatisticsResponse>(EndpointEnum.TEAM_STATISTICS, GenericParams(id, season))
 }
