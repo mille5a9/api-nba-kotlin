@@ -1,7 +1,6 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.models.Team
-import api.nba.kotlin.params.StandingsParams
 import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.StandingsResponse
 import io.ktor.client.engine.mock.MockEngine
@@ -137,7 +136,7 @@ class StandingsTest {
                 )
             }
         )
-        val response = apiNbaClient.getStandings(StandingsParams(league = "standard", season = 2021, team = 1))
+        val response = apiNbaClient.getStandings(Parameters(league = "standard", season = 2021, team = 1))
         assertEquals(response, expected)
     }
 }

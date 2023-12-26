@@ -1,8 +1,5 @@
 package api.nba.kotlin
 
-import api.nba.kotlin.models.Account
-import api.nba.kotlin.models.Requests
-import api.nba.kotlin.models.Subscription
 import api.nba.kotlin.responses.StatusResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -25,19 +22,19 @@ class AccountStatusTest {
         0,
         mapOf("current" to 1, "total" to 1),
         StatusResponse.Response(
-            Account(
+            StatusResponse.Account(
                 firstname = "John",
                 lastname = "Smith",
                 email = "test@gmail.com"
             ),
-            Subscription(
+            StatusResponse.Subscription(
                 plan = "Free",
                 end = "2024-12-20T00:00:00+00:00",
                 active = true
             ),
-            Requests(
+            StatusResponse.Requests(
                 current = 0,
-                limit_day = 100
+                limitDay = 100
             ),
         ),
     )

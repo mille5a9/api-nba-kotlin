@@ -1,7 +1,6 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.models.Team
-import api.nba.kotlin.params.PlayersStatisticsParams
 import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.PlayersStatisticsResponse
 import io.ktor.client.engine.mock.MockEngine
@@ -132,7 +131,7 @@ class PlayerStatisticsTest {
             }
         )
         val response = apiNbaClient.getPlayerStatistics(
-            PlayersStatisticsParams(id = 236, game = 8137, season = 2020)
+            Parameters(id = 236, game = 8137, season = 2020)
         )
         assertEquals(response, expected)
     }
