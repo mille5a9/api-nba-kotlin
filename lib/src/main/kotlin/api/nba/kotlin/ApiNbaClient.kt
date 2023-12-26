@@ -1,6 +1,7 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.enums.EndpointEnum
+import api.nba.kotlin.enums.HostEnum
 import api.nba.kotlin.models.Parameters
 import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.GamesResponse
@@ -26,7 +27,7 @@ import kotlinx.serialization.json.Json
 
 
 class ApiNbaClient(
-    private val host: String,
+    private val host: HostEnum,
     private val key: String,
     httpClientEngine: HttpClientEngine? = null,
 ) {
@@ -44,13 +45,13 @@ class ApiNbaClient(
         endpoint: EndpointEnum,
         params: Parameters? = null,
     ) = httpClient.get {
-        url(host + endpoint)
+        url(host.toString() + endpoint)
         params?.getParams()?.forEach { (k, v) -> parameter(k, v) }
         header(TOKEN_HEADER_KEY, key)
     }.body<EndpointResponse<T>>()
 
     suspend fun getAccountStatus() = httpClient.get {
-        url(host + EndpointEnum.STATUS)
+        url(host.toString() + EndpointEnum.STATUS)
         header(TOKEN_HEADER_KEY, key)
     }.body<StatusResponse>()
 
