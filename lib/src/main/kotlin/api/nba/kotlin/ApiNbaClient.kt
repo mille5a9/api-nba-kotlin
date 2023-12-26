@@ -79,4 +79,67 @@ class ApiNbaClient(
 
     suspend fun getTeamStatistics(teamId: Int, season: Int) =
         get<TeamsStatisticsResponse>(EndpointEnum.TEAM_STATISTICS, Parameters(id = teamId, season = season))
+
+    suspend fun getGameById(gameId: Int) =
+        get<GamesResponse>(EndpointEnum.GAMES, Parameters(id = gameId))
+
+    suspend fun getGamesBetweenTwoTeams(teamId1: Int, teamId2: Int) =
+        get<GamesResponse>(EndpointEnum.GAMES, Parameters(h2h = "$teamId1-$teamId2"))
+
+    suspend fun getLiveGames() = get<GamesResponse>(EndpointEnum.GAMES, Parameters(live = "all"))
+
+    suspend fun getGamesBySeason(season: Int) =
+        get<GamesResponse>(EndpointEnum.GAMES, Parameters(season = season))
+
+    // Date format "YYYY-mm-DD"
+    suspend fun getGamesByDate(date: String) = get<GamesResponse>(EndpointEnum.GAMES, Parameters(date = date))
+
+    suspend fun getGamesByTeamAndSeason(teamId: Int, season: Int) =
+        get<GamesResponse>(EndpointEnum.GAMES, Parameters(team = teamId, season = season))
+
+    suspend fun getAllTeams() = get<TeamsResponse>(EndpointEnum.TEAMS)
+
+    suspend fun getTeamById(teamId: Int) = get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(id = teamId))
+
+    suspend fun getTeamsByConference(conference: String) =
+        get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(conference = conference))
+
+    suspend fun getTeamsByDivision(division: String) =
+        get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(division = division))
+
+    suspend fun getTeamByCode(code: String) =
+        get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(code = code))
+
+    suspend fun getPlayersByTeamAndSeason(teamId: Int, season: Int) =
+        get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(team = teamId, season = season))
+
+    suspend fun getPlayerById(playerId: Int) =
+        get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(id = playerId))
+
+    suspend fun getPlayersByCountry(country: String) =
+        get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(country = country))
+
+    suspend fun getStandingsByConferenceAndSeason(conference: String, season: Int) =
+        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(conference = conference, season = season))
+
+    suspend fun getStandingsByDivisionAndSeason(division: String, season: Int) =
+        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(division = division, season = season))
+
+    suspend fun getStandingsByTeamAndSeason(teamId: Int, season: Int) =
+        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(team = teamId, season = season))
+
+    suspend fun getPlayersStatisticsByTeamAndSeason(teamId: Int, season: Int) =
+        get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, Parameters(team = teamId, season = season))
+
+    suspend fun getPlayerStatisticsByPlayerAndSeason(playerId: Int, season: Int) =
+        get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, Parameters(id = playerId, season = season))
+
+    suspend fun getPlayersStatisticsByGame(gameId: Int) =
+        get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, Parameters(game = gameId))
+
+    suspend fun searchTeams(query: String) =
+        get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(search = query))
+
+    suspend fun searchPlayers(query: String) =
+        get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(search = query))
 }

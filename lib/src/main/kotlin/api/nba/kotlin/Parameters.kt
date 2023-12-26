@@ -8,6 +8,7 @@ data class Parameters(
     private val league: String? = null,
     private val conference: String? = null,
     private val division: String? = null,
+    private val code: String? = null,
     private val h2h: String? = null,
     private val date: String? = null,
     private val live: String? = null,
