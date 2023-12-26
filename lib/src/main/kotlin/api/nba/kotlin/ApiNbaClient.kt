@@ -36,6 +36,10 @@ class ApiNbaClient(
     private val key: String,
     httpClientEngine: HttpClientEngine? = null,
 ) {
+    companion object {
+        const val TOKEN_HEADER_KEY = "x-rapidapi-key"
+    }
+
     private val httpClient: HttpClient = HttpClient(httpClientEngine ?: CIO.create()) {
         install(ContentNegotiation) { json() }
         install(HttpCache)
@@ -45,9 +49,9 @@ class ApiNbaClient(
         endpoint: EndpointEnum,
         params: EndpointParams? = null,
     ) = httpClient.get {
-        url("$host$endpoint")
+        url(host + endpoint)
         params?.getParams()?.forEach { (k, v) -> parameter(k, v) }
-        header("x-rapidapi-key", key)
+        header(TOKEN_HEADER_KEY, key)
     }.body<T>()
 
     suspend fun getAccountStatus() =
