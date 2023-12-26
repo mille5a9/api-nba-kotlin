@@ -1,5 +1,6 @@
 package api.nba.kotlin
 
+import api.nba.kotlin.models.Parameters
 import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.PlayersResponse
 import io.ktor.client.engine.mock.MockEngine

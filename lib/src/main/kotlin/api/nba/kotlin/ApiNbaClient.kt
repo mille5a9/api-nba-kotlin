@@ -1,6 +1,7 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.enums.EndpointEnum
+import api.nba.kotlin.models.Parameters
 import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.GamesResponse
 import api.nba.kotlin.responses.PlayersResponse

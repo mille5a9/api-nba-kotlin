@@ -1,4 +1,4 @@
-package api.nba.kotlin
+package api.nba.kotlin.models
 
 data class Parameters(
     private val id: Int? = null,
