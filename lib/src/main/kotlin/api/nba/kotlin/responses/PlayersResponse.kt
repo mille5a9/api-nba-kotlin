@@ -4,26 +4,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PlayersResponse(
-    val get: String,
-    val parameters: Map<String, String>,
-    val errors: List<String>,
-    val results: Int,
-    val response: List<Player>,
+    val id: Int,
+    val firstname: String,
+    val lastname: String,
+    val birth: Birth,
+    val nba: Nba,
+    val height: Height,
+    val weight: Weight,
+    val college: String,
+    val affiliation: String,
+    val leagues: Leagues,
 ) {
-    @Serializable
-    data class Player(
-        val id: Int,
-        val firstname: String,
-        val lastname: String,
-        val birth: Birth,
-        val nba: Nba,
-        val height: Height,
-        val weight: Weight,
-        val college: String,
-        val affiliation: String,
-        val leagues: Leagues,
-    )
-
     @Serializable
     data class Birth(
         val date: String,

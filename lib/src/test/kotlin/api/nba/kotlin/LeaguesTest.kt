@@ -1,6 +1,6 @@
 package api.nba.kotlin
 
-import api.nba.kotlin.responses.LeaguesResponse
+import api.nba.kotlin.responses.EndpointResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
@@ -15,16 +15,16 @@ class LeaguesTest {
 
     private lateinit var apiNbaClient: ApiNbaClient
 
-    private val expected: LeaguesResponse = LeaguesResponse(
+    private val expected: EndpointResponse<String> = EndpointResponse(
         "leagues/",
-        emptyList(),
+        emptyMap(),
         emptyList(),
         6,
         listOf("africa","orlando","sacramento","standard","utah","vegas")
     )
 
     @Test
-    fun seasonsReturns200(): Unit = runBlocking {
+    fun leaguesReturns200(): Unit = runBlocking {
         apiNbaClient = ApiNbaClient(
             "host",
             "undefined",

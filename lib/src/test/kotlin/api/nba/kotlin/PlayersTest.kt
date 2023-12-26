@@ -1,6 +1,7 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.params.PlayersParams
+import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.PlayersResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -16,13 +17,13 @@ class PlayersTest {
 
     private lateinit var apiNbaClient: ApiNbaClient
 
-    private val expected: PlayersResponse = PlayersResponse(
+    private val expected: EndpointResponse<PlayersResponse> = EndpointResponse(
         "players/",
         mapOf("id" to "553"),
         emptyList(),
         1,
         listOf(
-            PlayersResponse.Player(
+            PlayersResponse(
                 553,
                 "Lou",
                 "Williams",

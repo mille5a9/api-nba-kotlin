@@ -5,27 +5,18 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StandingsResponse(
-    val get: String,
-    val parameters: Map<String, String>,
-    val errors: List<String>,
-    val results: Int,
-    val response: List<Standing>,
+    val league: String,
+    val season: Int,
+    val team: Team,
+    val conference: Conference,
+    val division: Division,
+    val win: Record,
+    val loss: Record,
+    val gamesBehind: String,
+    val streak: Int,
+    val winStreak: Boolean,
+    val tieBreakerPoints: Int?,
 ) {
-    @Serializable
-    data class Standing(
-        val league: String,
-        val season: Int,
-        val team: Team,
-        val conference: Conference,
-        val division: Division,
-        val win: Record,
-        val loss: Record,
-        val gamesBehind: String,
-        val streak: Int,
-        val winStreak: Boolean,
-        val tieBreakerPoints: Int?,
-    )
-
     @Serializable
     data class Conference(
         val name: String,

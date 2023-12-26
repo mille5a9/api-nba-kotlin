@@ -6,15 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GamesStatisticsResponse(
-    val get: String,
-    val parameters: Map<String, String>,
-    val errors: List<String>,
-    val results: Int,
-    val response: List<TeamStats>,
-) {
-    @Serializable
-    data class TeamStats(
-        val team: Team,
-        val statistics: List<GameStatistics>,
-    )
-}
+    val team: Team,
+    val statistics: List<GameStatistics>,
+)

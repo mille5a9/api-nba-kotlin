@@ -8,10 +8,9 @@ import api.nba.kotlin.params.PlayersParams
 import api.nba.kotlin.params.PlayersStatisticsParams
 import api.nba.kotlin.params.StandingsParams
 import api.nba.kotlin.params.TeamsParams
+import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.GamesResponse
-import api.nba.kotlin.responses.LeaguesResponse
 import api.nba.kotlin.responses.PlayersResponse
-import api.nba.kotlin.responses.SeasonsResponse
 import api.nba.kotlin.responses.StandingsResponse
 import api.nba.kotlin.responses.GamesStatisticsResponse
 import api.nba.kotlin.responses.PlayersStatisticsResponse
@@ -29,6 +28,8 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 
 
 class ApiNbaClient(
@@ -41,27 +42,30 @@ class ApiNbaClient(
     }
 
     private val httpClient: HttpClient = HttpClient(httpClientEngine ?: CIO.create()) {
-        install(ContentNegotiation) { json() }
+        install(ContentNegotiation) { json(Json { isLenient = true }) }
         install(HttpCache)
     }
 
-    private suspend inline fun <reified T> get(
+    // Gets the Response from the API, where the 'response' property contains a list of T
+    private suspend inline fun <reified T : Any> get(
         endpoint: EndpointEnum,
         params: EndpointParams? = null,
     ) = httpClient.get {
         url(host + endpoint)
         params?.getParams()?.forEach { (k, v) -> parameter(k, v) }
         header(TOKEN_HEADER_KEY, key)
-    }.body<T>()
+    }.body<EndpointResponse<T>>()
 
-    suspend fun getAccountStatus() =
-        get<StatusResponse>(EndpointEnum.STATUS)
+    suspend fun getAccountStatus() = httpClient.get {
+        url(host + EndpointEnum.STATUS)
+        header(TOKEN_HEADER_KEY, key)
+    }.body<StatusResponse>()
 
     suspend fun getSeasons() =
-        get<SeasonsResponse>(EndpointEnum.SEASONS)
+        get<Int>(EndpointEnum.SEASONS)
 
     suspend fun getLeagues() =
-        get<LeaguesResponse>(EndpointEnum.LEAGUES)
+        get<String>(EndpointEnum.LEAGUES)
 
     internal suspend fun getGames(params: GamesParams) =
         get<GamesResponse>(EndpointEnum.GAMES, params)

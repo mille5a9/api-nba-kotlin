@@ -2,6 +2,7 @@ package api.nba.kotlin
 
 import api.nba.kotlin.models.Team
 import api.nba.kotlin.params.StandingsParams
+import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.StandingsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -17,13 +18,13 @@ class StandingsTest {
 
     private lateinit var apiNbaClient: ApiNbaClient
 
-    private val expected: StandingsResponse = StandingsResponse(
+    private val expected: EndpointResponse<StandingsResponse> = EndpointResponse(
         "standings/",
         mapOf("league" to "standard", "season" to "2021", "team" to "1"),
         emptyList(),
         1,
         listOf(
-            StandingsResponse.Standing(
+            StandingsResponse(
                 "standard",
                 2021,
                 Team(

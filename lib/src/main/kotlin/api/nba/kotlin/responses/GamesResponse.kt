@@ -5,29 +5,22 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GamesResponse(
-    val get: String,
-    val parameters: Map<String, String>,
-    val errors: List<String>,
-    val results: Int,
-    val response: List<Game>,
+    val id: Int,
+    val league: String,
+    val season: Int,
+    val date: Date,
+    val stage: Int,
+    val status: Status,
+    val periods: Periods,
+    val arena: Arena,
+    val teams: Teams,
+    val scores: Scores,
+    val officials: List<String>,
+    val timesTied: Int,
+    val leadChanges: Int,
+    val nugget: String?
 ) {
-    @Serializable
-    data class Game(
-        val id: Int,
-        val league: String,
-        val season: Int,
-        val date: Date,
-        val stage: Int,
-        val status: Status,
-        val periods: Periods,
-        val arena: Arena,
-        val teams: Teams,
-        val scores: Scores,
-        val officials: List<String>,
-        val timesTied: Int,
-        val leadChanges: Int,
-        val nugget: String?
-    )
+
 
     @Serializable
     data class Date(

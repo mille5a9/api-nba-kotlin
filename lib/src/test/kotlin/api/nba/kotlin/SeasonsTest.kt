@@ -1,6 +1,6 @@
 package api.nba.kotlin
 
-import api.nba.kotlin.responses.SeasonsResponse
+import api.nba.kotlin.responses.EndpointResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
@@ -15,9 +15,9 @@ class SeasonsTest {
 
     private lateinit var apiNbaClient: ApiNbaClient
 
-    private val expected: SeasonsResponse = SeasonsResponse(
+    private val expected: EndpointResponse<Int> = EndpointResponse(
         "seasons/",
-        emptyList(),
+        emptyMap(),
         emptyList(),
         9,
         listOf(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023)

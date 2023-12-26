@@ -1,6 +1,6 @@
 package api.nba.kotlin
 
-import api.nba.kotlin.models.TeamStatistics
+import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.TeamsStatisticsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -16,13 +16,13 @@ class TeamStatisticsTest {
 
     private lateinit var apiNbaClient: ApiNbaClient
 
-    private val expected: TeamsStatisticsResponse = TeamsStatisticsResponse(
+    private val expected: EndpointResponse<TeamsStatisticsResponse> = EndpointResponse(
         "teams/statistics",
         mapOf("id" to "1", "season" to "2021"),
         emptyList(),
         1,
         listOf(
-            TeamStatistics(
+            TeamsStatisticsResponse(
                 94,
                 894,
                 4198,
