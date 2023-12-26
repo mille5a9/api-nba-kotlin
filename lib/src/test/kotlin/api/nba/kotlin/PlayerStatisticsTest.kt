@@ -1,5 +1,6 @@
 package api.nba.kotlin
 
+import api.nba.kotlin.enums.HostEnum
 import api.nba.kotlin.models.Parameters
 import api.nba.kotlin.models.Team
 import api.nba.kotlin.responses.EndpointResponse
@@ -69,7 +70,7 @@ class PlayerStatisticsTest {
     @Test
     fun gamesStatisticsReturns200(): Unit = runBlocking {
         apiNbaClient = ApiNbaClient(
-            "host",
+            HostEnum.API_SPORTS,
             "undefined",
             MockEngine { _ ->
                 respond(
