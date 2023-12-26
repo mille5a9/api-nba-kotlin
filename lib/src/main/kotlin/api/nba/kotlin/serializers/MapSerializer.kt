@@ -1,6 +1,5 @@
 package api.nba.kotlin.serializers
 
-import io.ktor.serialization.JsonConvertException
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
