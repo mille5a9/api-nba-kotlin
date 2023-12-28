@@ -11,5 +11,5 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
 }
 
-rootProject.name = "api-nba-kotlin"
-include("lib")
+rootProject.name = "api-sports-kotlin"
+include("api-nba-kotlin")
