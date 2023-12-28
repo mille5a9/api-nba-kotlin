@@ -1,5 +1,22 @@
 package api.nba.kotlin.models
 
+/**
+ * Represents the parameters for making API requests.
+ *
+ * @property id The ID parameter.
+ * @property game The game parameter.
+ * @property season The season parameter.
+ * @property team The team parameter.
+ * @property league The league parameter.
+ * @property conference The conference parameter.
+ * @property division The division parameter.
+ * @property code The code parameter.
+ * @property h2h The h2h parameter.
+ * @property date The date parameter.
+ * @property live The live parameter.
+ * @property country The country parameter.
+ * @property search The search parameter.
+ */
 data class Parameters(
     private val id: Int? = null,
     private val game: Int? = null,
@@ -15,6 +32,11 @@ data class Parameters(
     private val country: String? = null,
     private val search: String? = null,
 ) {
+    /**
+     * Returns the parameters as a map.
+     *
+     * @return the parameters map.
+     */
     fun getParams(): Map<String, String?> = mapOf(
         "id" to id?.toString(),
         "game" to game?.toString(),

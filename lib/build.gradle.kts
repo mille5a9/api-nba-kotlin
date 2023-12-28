@@ -7,6 +7,10 @@
  */
 val ktorVersion: String by project
 
+group = "com.github.mille5a9"
+version = "1.0.0-alpha"
+description = "Unofficial wrapper for the API-SPORTS NBA API"
+
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     alias(libs.plugins.jvm)
@@ -15,6 +19,9 @@ plugins {
     `java-library`
 
     kotlin("plugin.serialization") version "1.9.21"
+
+    // Apply the Maven Publish plugin to add support for publishing via Maven.
+    `maven-publish`
 }
 
 repositories {
@@ -33,7 +40,8 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
 
-    testImplementation("io.ktor:ktor-client-mock:$ktorVersion")}
+    testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
+}
 
 testing {
     suites {
@@ -49,5 +57,28 @@ testing {
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
+    from(sourceSets.main.get().allSource)
+}
+
+afterEvaluate {
+    tasks.getByName("generateMetadataFileForMavenJavaPublication") {
+        dependsOn(sourcesJar)
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url = uri("https://github.com/mille5a9/api-nba-kotlin")
+        }
+    }
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            from(components["kotlin"])
+        }
     }
 }
