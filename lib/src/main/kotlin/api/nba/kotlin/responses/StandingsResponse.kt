@@ -3,6 +3,21 @@ package api.nba.kotlin.responses
 import api.nba.kotlin.models.Team
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents a response object for retrieving standings information.
+ *
+ * @param league The name of the league.
+ * @param season The season.
+ * @param team The team.
+ * @param conference The conference.
+ * @param division The division.
+ * @param win The win record.
+ * @param loss The loss record.
+ * @param gamesBehind The games behind.
+ * @param streak The streak.
+ * @param winStreak The win streak status.
+ * @param tieBreakerPoints The tie-breaker points (can be null).
+ */
 @Serializable
 data class StandingsResponse(
     val league: String,
@@ -17,6 +32,14 @@ data class StandingsResponse(
     val winStreak: Boolean,
     val tieBreakerPoints: Int?,
 ) {
+    /**
+     * Represents a conference in the NBA.
+     *
+     * @property name The name of the conference.
+     * @property rank The rank of the conference.
+     * @property win The number of wins.
+     * @property loss The number of losses.
+     */
     @Serializable
     data class Conference(
         val name: String,
@@ -25,6 +48,15 @@ data class StandingsResponse(
         val loss: Int,
     )
 
+    /**
+     * Represents a division in the NBA.
+     *
+     * @property name The name of the division.
+     * @property rank The rank of the division.
+     * @property win The number of wins.
+     * @property loss The number of losses.
+     * @property gamesBehind The games behind as a string.
+     */
     @Serializable
     data class Division(
         val name: String,
@@ -34,6 +66,15 @@ data class StandingsResponse(
         val gamesBehind: String,
     )
 
+    /**
+     * Represents a record in the NBA standings.
+     *
+     * @property home The number of home wins.
+     * @property away The number of away wins.
+     * @property total The total number of wins.
+     * @property percentage The win percentage as a string.
+     * @property lastTen The number of wins in the last ten games.
+     */
     @Serializable
     data class Record(
         val home: Int,
