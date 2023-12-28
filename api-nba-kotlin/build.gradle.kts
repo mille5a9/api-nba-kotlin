@@ -6,9 +6,11 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 val ktorVersion: String by project
+val ossrhUsername: String by project
+val ossrhPassword: String by project
 
-group = "com.github.mille5a9"
-version = "1.0.0-alpha"
+group = "io.github.mille5a9"
+version = "1.0.2-alpha"
 description = "Unofficial wrapper for the API-SPORTS NBA API"
 
 plugins {
@@ -22,6 +24,7 @@ plugins {
 
     // Apply the Maven Publish plugin to add support for publishing via Maven.
     `maven-publish`
+    signing
 }
 
 repositories {
@@ -73,12 +76,45 @@ afterEvaluate {
 publishing {
     repositories {
         maven {
-            url = uri("https://github.com/mille5a9/api-nba-kotlin")
+            url = uri("https://github.com/mille5a9/api-sports-kotlin")
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
         }
     }
     publications {
         register("mavenJava", MavenPublication::class) {
             from(components["kotlin"])
+            pom {
+                name.set("api-nba-kotlin")
+                description.set("Unofficial wrapper for the API-SPORTS NBA API")
+                url.set("https://github.com/mille5a9/api-sports-kotlin")
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("mille5a9")
+                        name.set("Andrew Miller")
+                        email.set("atmiller192@gmail.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:https://github.com/mille5a9/api-sports-kotlin.git")
+                    developerConnection.set("scm:git:https://github.com/mille5a9/api-sports-kotlin.git")
+                    url.set("https://github.com/mille5a9/api-sports-kotlin")
+                }
+            }
         }
     }
+}
+
+signing {
+    sign(publishing.publications["mavenJava"])
+    val keyId: String by project
+    val secretKeyRingFile: String by project
 }
