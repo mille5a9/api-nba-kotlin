@@ -76,7 +76,7 @@ afterEvaluate {
 publishing {
     repositories {
         maven {
-            url = uri("https://github.com/mille5a9/api-sports-kotlin")
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
                 username = ossrhUsername
                 password = ossrhPassword
