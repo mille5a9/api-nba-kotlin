@@ -10,7 +10,7 @@ val ossrhUsername: String by project
 val ossrhPassword: String by project
 
 group = "io.github.mille5a9"
-version = "1.0.2-alpha"
+version = "1.0.3-alpha"
 description = "Unofficial wrapper for the API-SPORTS NBA API"
 
 plugins {
@@ -38,7 +38,8 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation(libs.guava)
-    implementation("io.ktor:ktor-client-core:$ktorVersion")
+
+    api("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
@@ -65,6 +66,7 @@ java {
 
 val sourcesJar by tasks.registering(Jar::class) {
     from(sourceSets.main.get().allSource)
+    archiveClassifier.set("sources")
 }
 
 afterEvaluate {
@@ -85,7 +87,8 @@ publishing {
     }
     publications {
         register("mavenJava", MavenPublication::class) {
-            from(components["kotlin"])
+            from(components["java"])
+            artifact(sourcesJar.get())
             pom {
                 name.set("api-nba-kotlin")
                 description.set("Unofficial wrapper for the API-SPORTS NBA API")

@@ -27,8 +27,8 @@ data class StandingsResponse(
     val division: Division,
     val win: Record,
     val loss: Record,
-    val gamesBehind: String,
-    val streak: Int,
+    val gamesBehind: String?,
+    val streak: Int?,
     val winStreak: Boolean,
     val tieBreakerPoints: Int?,
 ) {
@@ -63,7 +63,7 @@ data class StandingsResponse(
         val rank: Int,
         val win: Int,
         val loss: Int,
-        val gamesBehind: String,
+        val gamesBehind: String?,
     )
 
     /**

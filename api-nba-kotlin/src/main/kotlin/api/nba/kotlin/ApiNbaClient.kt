@@ -250,7 +250,7 @@ class ApiNbaClient(
      * @return The standings response as an EndpointResponse<StandingsResponse> object.
      */
     suspend fun getStandingsByConferenceAndSeason(conference: String, season: Int) =
-        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(conference = conference, season = season))
+        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(conference = conference, season = season, league = "standard"))
 
     /**
      * Retrieves the standings by division and season from the NBA API.
@@ -260,7 +260,7 @@ class ApiNbaClient(
      * @return The standings response as an EndpointResponse<StandingsResponse> object.
      */
     suspend fun getStandingsByDivisionAndSeason(division: String, season: Int) =
-        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(division = division, season = season))
+        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(division = division, season = season, league = "standard"))
 
     /**
      * Retrieves the standings for a specific team and season from the NBA API.
@@ -270,7 +270,7 @@ class ApiNbaClient(
      * @return The standings response as an EndpointResponse<StandingsResponse> object.
      */
     suspend fun getStandingsByTeamAndSeason(teamId: Int, season: Int) =
-        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(team = teamId, season = season))
+        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(team = teamId, season = season, league = "standard"))
 
     /**
      * Retrieves the players statistics for a specific team and season from the NBA API.
