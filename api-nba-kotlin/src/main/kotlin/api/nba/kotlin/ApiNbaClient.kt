@@ -22,8 +22,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
+import io.ktor.serialization.gson.gson
 
 
 /**
@@ -43,7 +42,7 @@ class ApiNbaClient(
     }
 
     private val httpClient: HttpClient = HttpClient(httpClientEngine ?: CIO.create()) {
-        install(ContentNegotiation) { json(Json { isLenient = true }) }
+        install(ContentNegotiation) { gson { setLenient() } }
         install(HttpCache)
     }
 

@@ -1,8 +1,5 @@
 package api.nba.kotlin.responses
 
-import api.nba.kotlin.serializers.MapSerializer
-import kotlinx.serialization.Serializable
-
 /**
  * Represents the response returned from an API endpoint.
  *
@@ -14,10 +11,9 @@ import kotlinx.serialization.Serializable
  * @property response The response data, represented as a list of type T.
  * @constructor Creates a new instance of EndpointResponse.
  */
-@Serializable
 data class EndpointResponse<T : Any>(
     val get: String,
-    @Serializable(with = MapSerializer::class) val parameters: Map<String, String>,
+    val parameters: Map<String, String>,
     val errors: List<String>,
     val results: Int,
     val response: List<T>,
