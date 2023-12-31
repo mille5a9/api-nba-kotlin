@@ -21,6 +21,7 @@ plugins {
     `java-library`
 
     kotlin("plugin.serialization") version "1.9.21"
+    id("org.jetbrains.dokka") version "1.9.10"
 
     // Apply the Maven Publish plugin to add support for publishing via Maven.
     `maven-publish`
@@ -62,6 +63,10 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
     }
+}
+
+java {
+    withJavadocJar()
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
