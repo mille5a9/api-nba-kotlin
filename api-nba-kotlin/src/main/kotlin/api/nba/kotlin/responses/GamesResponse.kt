@@ -34,8 +34,8 @@ data class GamesResponse(
     val teams: Teams,
     val scores: Scores,
     val officials: List<String>,
-    val timesTied: Int,
-    val leadChanges: Int,
+    val timesTied: Int?,
+    val leadChanges: Int?,
     val nugget: String?
 ) {
 
@@ -49,8 +49,8 @@ data class GamesResponse(
     @Serializable
     data class Date(
         val start: String,
-        val end: String,
-        val duration: String,
+        val end: String?,
+        val duration: String?,
     )
 
     /**
@@ -64,7 +64,7 @@ data class GamesResponse(
     @Serializable
     data class Status(
         val clock: String?,
-        val halftime: Boolean,
+        val halftime: Boolean?,
         val short: Int,
         val long: String,
     )
@@ -80,7 +80,7 @@ data class GamesResponse(
     data class Periods(
         val current: Int,
         val total: Int,
-        val endOfPeriod: Boolean,
+        val endOfPeriod: Boolean?,
     )
 
     /**
@@ -93,10 +93,10 @@ data class GamesResponse(
      */
     @Serializable
     data class Arena(
-        val name: String,
-        val city: String,
-        val state: String,
-        val country: String,
+        val name: String?,
+        val city: String?,
+        val state: String?,
+        val country: String?,
     )
 
     /**
@@ -134,11 +134,11 @@ data class GamesResponse(
      */
     @Serializable
     data class Score(
-        val win: Int,
-        val loss: Int,
+        val win: Int?,
+        val loss: Int?,
         val series: Series,
         val linescore: List<String>,
-        val points: Int,
+        val points: Int?,
     )
 
     /**
@@ -149,7 +149,7 @@ data class GamesResponse(
      */
     @Serializable
     data class Series(
-        val win: Int,
-        val loss: Int,
+        val win: Int?,
+        val loss: Int?,
     )
 }

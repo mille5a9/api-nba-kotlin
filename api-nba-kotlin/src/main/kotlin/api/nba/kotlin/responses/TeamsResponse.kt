@@ -21,8 +21,8 @@ data class TeamsResponse(
     val name: String,
     val nickname: String,
     val code: String,
-    val city: String,
-    val logo: String,
+    val city: String?,
+    val logo: String?,
     val allStar: Boolean,
     val nbaFranchise: Boolean,
     val leagues: Leagues,
@@ -39,7 +39,7 @@ data class TeamsResponse(
      */
     @Serializable
     data class Leagues(
-        val standard: League,
+        val standard: League? = null,
         val africa: League? = null,
         val sacramento: League? = null,
         val vegas: League? = null,

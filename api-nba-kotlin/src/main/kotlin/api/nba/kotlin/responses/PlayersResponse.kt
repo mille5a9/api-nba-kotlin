@@ -25,8 +25,8 @@ data class PlayersResponse(
     val nba: Nba,
     val height: Height,
     val weight: Weight,
-    val college: String,
-    val affiliation: String,
+    val college: String?,
+    val affiliation: String?,
     val leagues: Leagues,
 ) {
     /**
@@ -37,8 +37,8 @@ data class PlayersResponse(
      */
     @Serializable
     data class Birth(
-        val date: String,
-        val country: String,
+        val date: String?,
+        val country: String?,
     )
 
     /**
@@ -62,9 +62,9 @@ data class PlayersResponse(
      */
     @Serializable
     data class Height(
-        val feets: String,
-        val inches: String,
-        val meters: String,
+        val feets: String?,
+        val inches: String?,
+        val meters: String?,
     )
 
     /**
@@ -75,8 +75,8 @@ data class PlayersResponse(
      */
     @Serializable
     data class Weight(
-        val pounds: String,
-        val kilograms: String,
+        val pounds: String?,
+        val kilograms: String?,
     )
 
     /**
@@ -91,7 +91,7 @@ data class PlayersResponse(
      */
     @Serializable
     data class Leagues(
-        val standard: League,
+        val standard: League? = null,
         val africa: League? = null,
         val sacramento: League? = null,
         val vegas: League? = null,
@@ -108,7 +108,7 @@ data class PlayersResponse(
      */
     @Serializable
     data class League(
-        val jersey: Int,
+        val jersey: Int?,
         val active: Boolean,
         val pos: String,
     )
