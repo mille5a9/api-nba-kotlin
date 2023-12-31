@@ -10,7 +10,7 @@ val ossrhUsername: String by project
 val ossrhPassword: String by project
 
 group = "io.github.mille5a9"
-version = "1.0.3-alpha"
+version = "1.0.4-alpha"
 description = "Unofficial wrapper for the API-SPORTS NBA API"
 
 plugins {
@@ -41,8 +41,8 @@ dependencies {
     implementation(libs.guava)
 
     api("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-gson:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
 
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")

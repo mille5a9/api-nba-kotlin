@@ -1,9 +1,7 @@
 package api.nba.kotlin.responses
 
 import api.nba.kotlin.models.Team
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class GamesStatisticsResponse(
     val team: Team,
     val statistics: List<GameStatistics>,
@@ -37,7 +35,6 @@ data class GamesStatisticsResponse(
      * @property blocks The number of blocks.
      * @property plusMinus The plus/minus of the team.
     */
-    @Serializable
     data class GameStatistics(
         val fastBreakPoints: Int,
         val pointsInPaint: Int,

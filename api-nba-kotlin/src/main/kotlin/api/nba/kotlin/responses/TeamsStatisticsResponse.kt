@@ -1,7 +1,5 @@
 package api.nba.kotlin.responses
 
-import kotlinx.serialization.Serializable
-
 /**
  * Represents the response object for team statistics.
  *
@@ -32,7 +30,6 @@ import kotlinx.serialization.Serializable
  * @property blocks The total number of blocks.
  * @property plusMinus The plus/minus of the team.
  */
-@Serializable
 data class TeamsStatisticsResponse(
     val games: Int,
     val fastBreakPoints: Int,

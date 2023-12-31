@@ -1,7 +1,6 @@
 package api.nba.kotlin.responses
 
 import api.nba.kotlin.models.Team
-import kotlinx.serialization.Serializable
 
 /**
  * Represents the response object for player statistics.
@@ -31,7 +30,6 @@ import kotlinx.serialization.Serializable
  * @param blocks The total number of blocks by the player.
  * @param plusMinus The plus/minus of the player.
  */
-@Serializable
 data class PlayersStatisticsResponse(
     val player: Player,
     val team: Team,
@@ -66,7 +64,6 @@ data class PlayersStatisticsResponse(
      * @property firstname The firstname of the player.
      * @property lastname The lastname of the player.
      */
-    @Serializable
     data class Player(val id: Int, val firstname: String, val lastname: String)
 
     /**
@@ -74,6 +71,5 @@ data class PlayersStatisticsResponse(
      *
      * @property id The unique identifier of the game.
      */
-    @Serializable
     data class Game(val id: Int)
 }

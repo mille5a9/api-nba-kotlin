@@ -37,11 +37,11 @@ data class Parameters(
      *
      * @return the parameters map.
      */
-    fun getParams(): Map<String, String?> = mapOf(
-        "id" to id?.toString(),
-        "game" to game?.toString(),
-        "season" to season?.toString(),
-        "team" to team?.toString(),
+    fun getParams(): Map<String, Any?> = mapOf(
+        "id" to id,
+        "game" to game,
+        "season" to season,
+        "team" to team,
         "league" to league,
         "conference" to conference,
         "division" to division,

@@ -1,7 +1,5 @@
 package api.nba.kotlin.models
 
-import kotlinx.serialization.Serializable
-
 /**
  * Represents an NBA team.
  *
@@ -11,7 +9,6 @@ import kotlinx.serialization.Serializable
  * @property code The code of the team.
  * @property logo The URL of the team's logo.
  */
-@Serializable
 data class Team(
     val id: Int,
     val name: String,

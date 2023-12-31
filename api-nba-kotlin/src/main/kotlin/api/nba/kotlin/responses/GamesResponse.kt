@@ -1,7 +1,6 @@
 package api.nba.kotlin.responses
 
 import api.nba.kotlin.models.Team
-import kotlinx.serialization.Serializable
 
 /**
  * Represents the response data for retrieving games from the NBA API.
@@ -21,7 +20,6 @@ import kotlinx.serialization.Serializable
  * @param leadChanges The number of lead changes in the game.
  * @param nugget Additional information about the game.
  */
-@Serializable
 data class GamesResponse(
     val id: Int,
     val league: String,
@@ -46,7 +44,6 @@ data class GamesResponse(
      * @property end The end timestamp of the date.
      * @property duration The duration of the date.
      */
-    @Serializable
     data class Date(
         val start: String,
         val end: String?,
@@ -61,7 +58,6 @@ data class GamesResponse(
      * @property short The short representation of the game status.
      * @property long The long representation of the game status.
      */
-    @Serializable
     data class Status(
         val clock: String?,
         val halftime: Boolean?,
@@ -76,7 +72,6 @@ data class GamesResponse(
      * @property total The total number of periods in the game.
      * @property endOfPeriod Indicates if the current period has ended.
      */
-    @Serializable
     data class Periods(
         val current: Int,
         val total: Int,
@@ -91,7 +86,6 @@ data class GamesResponse(
      * @property state The state where the arena is located.
      * @property country The country where the arena is located.
      */
-    @Serializable
     data class Arena(
         val name: String?,
         val city: String?,
@@ -105,7 +99,6 @@ data class GamesResponse(
      * @property visitors The visiting team.
      * @property home The home team.
      */
-    @Serializable
     data class Teams(
         val visitors: Team,
         val home: Team,
@@ -117,7 +110,6 @@ data class GamesResponse(
      * @property visitors The visiting team's score.
      * @property home The home team's score.
      */
-    @Serializable
     data class Scores(
         val visitors: Score,
         val home: Score,
@@ -132,7 +124,6 @@ data class GamesResponse(
      * @property linescore The linescore of the game.
      * @property points The total number of points.
      */
-    @Serializable
     data class Score(
         val win: Int?,
         val loss: Int?,
@@ -147,7 +138,6 @@ data class GamesResponse(
      * @property win The number of wins.
      * @property loss The number of losses.
      */
-    @Serializable
     data class Series(
         val win: Int?,
         val loss: Int?,

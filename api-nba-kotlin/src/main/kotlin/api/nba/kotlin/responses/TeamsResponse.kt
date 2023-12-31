@@ -1,7 +1,5 @@
 package api.nba.kotlin.responses
 
-import kotlinx.serialization.Serializable
-
 /**
  * Represents a response object containing information about NBA teams.
  *
@@ -15,7 +13,6 @@ import kotlinx.serialization.Serializable
  * @param nbaFranchise Indicates whether the team is an NBA franchise.
  * @param leagues The leagues associated with the team.
  */
-@Serializable
 data class TeamsResponse(
     val id: Int,
     val name: String,
@@ -37,7 +34,6 @@ data class TeamsResponse(
      * @property utah The Utah league associated with the NBA teams. Can be null.
      * @property orlando The Orlando league associated with the NBA teams. Can be null.
      */
-    @Serializable
     data class Leagues(
         val standard: League? = null,
         val africa: League? = null,
@@ -53,7 +49,6 @@ data class TeamsResponse(
      * @property conference The conference associated with the NBA teams. Can be null.
      * @property division The division associated with the NBA teams. Can be null.
      */
-    @Serializable
     data class League(
         val conference: String?,
         val division: String?,

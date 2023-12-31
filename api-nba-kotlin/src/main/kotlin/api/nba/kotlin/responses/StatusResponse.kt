@@ -1,7 +1,6 @@
 package api.nba.kotlin.responses
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
 /**
  * Represents the status response received from the API.
@@ -13,7 +12,6 @@ import kotlinx.serialization.Serializable
  * @property paging The map containing the paging information.
  * @property response The response object.
  */
-@Serializable
 data class StatusResponse(
     val get: String,
     val parameters: List<String>,
@@ -29,7 +27,6 @@ data class StatusResponse(
      * @property account The account information.
      * @property subscription The subscription information.
      * @property requests The*/
-    @Serializable
     data class Response(
         val account: Account,
         val subscription: Subscription,
@@ -43,7 +40,6 @@ data class StatusResponse(
      * @property lastname The last name of the account owner.
      * @property email The email address of the account owner.
      */
-    @Serializable
     data class Account(
         val firstname: String,
         val lastname: String,
@@ -57,7 +53,6 @@ data class StatusResponse(
      * @property end The end date of the subscription.
      * @property active Indicates whether the subscription is active or not.
      */
-    @Serializable
     data class Subscription(
         val plan: String,
         val end: String,
@@ -70,9 +65,8 @@ data class StatusResponse(
      * @property current The current number of requests made.
      * @property limitDay The daily limit for requests.
      */
-    @Serializable
     data class Requests(
         val current: Int,
-        @SerialName("limit_day") val limitDay: Int,
+        @SerializedName("limit_day") val limitDay: Int,
     )
 }

@@ -1,7 +1,5 @@
 package api.nba.kotlin.responses
 
-import kotlinx.serialization.Serializable
-
 /**
  * Represents a response object for retrieving player information.
  *
@@ -16,7 +14,6 @@ import kotlinx.serialization.Serializable
  * @property affiliation The affiliation of the player.
  * @property leagues The leagues in which the player has played.
  */
-@Serializable
 data class PlayersResponse(
     val id: Int,
     val firstname: String,
@@ -35,7 +32,6 @@ data class PlayersResponse(
      * @property date The birth date of the player in the format "YYYY-mm-DD".
      * @property country The country of birth of the player.
      */
-    @Serializable
     data class Birth(
         val date: String?,
         val country: String?,
@@ -47,7 +43,6 @@ data class PlayersResponse(
      * @property start The starting season of the player in the NBA.
      * @property pro The number of seasons the player has played in the NBA.
      */
-    @Serializable
     data class Nba(
         val start: Int,
         val pro: Int,
@@ -60,7 +55,6 @@ data class PlayersResponse(
      * @property inches The height of the player in inches.
      * @property meters The height of the player in meters.
      */
-    @Serializable
     data class Height(
         val feets: String?,
         val inches: String?,
@@ -73,7 +67,6 @@ data class PlayersResponse(
      * @property pounds The weight of the player in pounds.
      * @property kilograms The weight of the player in kilograms.
      */
-    @Serializable
     data class Weight(
         val pounds: String?,
         val kilograms: String?,
@@ -89,7 +82,6 @@ data class PlayersResponse(
      * @property utah The Utah league in which the player has played.
      * @property orlando The Orlando league in which the player has played.
      */
-    @Serializable
     data class Leagues(
         val standard: League? = null,
         val africa: League? = null,
@@ -106,7 +98,6 @@ data class PlayersResponse(
      * @property active Indicates if the player is currently active in the league.
      * @property pos The position of the player in the league.
      */
-    @Serializable
     data class League(
         val jersey: Int?,
         val active: Boolean,

@@ -1,7 +1,6 @@
 package api.nba.kotlin.responses
 
 import api.nba.kotlin.models.Team
-import kotlinx.serialization.Serializable
 
 /**
  * Represents a response object for retrieving standings information.
@@ -18,7 +17,6 @@ import kotlinx.serialization.Serializable
  * @param winStreak The win streak status.
  * @param tieBreakerPoints The tie-breaker points (can be null).
  */
-@Serializable
 data class StandingsResponse(
     val league: String,
     val season: Int,
@@ -40,7 +38,6 @@ data class StandingsResponse(
      * @property win The number of wins.
      * @property loss The number of losses.
      */
-    @Serializable
     data class Conference(
         val name: String,
         val rank: Int,
@@ -57,7 +54,6 @@ data class StandingsResponse(
      * @property loss The number of losses.
      * @property gamesBehind The games behind as a string.
      */
-    @Serializable
     data class Division(
         val name: String,
         val rank: Int,
@@ -75,7 +71,6 @@ data class StandingsResponse(
      * @property percentage The win percentage as a string.
      * @property lastTen The number of wins in the last ten games.
      */
-    @Serializable
     data class Record(
         val home: Int,
         val away: Int,
