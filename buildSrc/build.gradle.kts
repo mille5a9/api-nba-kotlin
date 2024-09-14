@@ -1,18 +1,14 @@
 plugins {
-    kotlin("jvm") version "1.9.21"
+    `kotlin-dsl`
 }
-
-group = "org.mille5a9"
-version = "unspecified"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
 
-kotlin {
-    jvmToolchain(17)
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
+    implementation("org.jetbrains.kotlin:kotlin-serialization:1.9.21")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.9.20")
 }

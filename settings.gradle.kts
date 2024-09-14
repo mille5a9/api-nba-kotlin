@@ -12,4 +12,4 @@ plugins {
 }
 
 rootProject.name = "api-sports-kotlin"
-include("api-nba-kotlin")
+include("api-nba-kotlin", "common")

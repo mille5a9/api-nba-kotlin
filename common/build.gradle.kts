@@ -1,9 +1,9 @@
-plugins {
-    kotlin("jvm") version "1.9.21"
-}
+group = "io.github.mille5a9"
+version = "1.0"
 
-group = "org.mille5a9"
-version = "unspecified"
+plugins {
+    id("api-sports.conventions")
+}
 
 repositories {
     mavenCentral()
