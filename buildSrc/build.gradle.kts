@@ -2,13 +2,17 @@ plugins {
     `kotlin-dsl`
 }
 
+apply("../gradle/loadProps.gradle")
+val kotlinVersion: String by project
+val dokkaVersion: String by project
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
 
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
-    implementation("org.jetbrains.kotlin:kotlin-serialization:1.9.21")
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.9.20")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
 }

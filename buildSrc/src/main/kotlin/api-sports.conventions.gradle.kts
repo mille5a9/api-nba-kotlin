@@ -1,9 +1,3 @@
-import gradle.kotlin.dsl.accessors._adc73c88e0a124c97e28fdd97139246a.api
-import gradle.kotlin.dsl.accessors._adc73c88e0a124c97e28fdd97139246a.implementation
-import gradle.kotlin.dsl.accessors._adc73c88e0a124c97e28fdd97139246a.testImplementation
-import org.gradle.kotlin.dsl.kotlin
-import org.gradle.kotlin.dsl.repositories
-
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
