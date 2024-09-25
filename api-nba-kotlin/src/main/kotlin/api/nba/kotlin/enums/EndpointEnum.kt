@@ -32,8 +32,8 @@ enum class EndpointEnum {
      *
      * @return the string representation of the object
      */
-    override fun toString(): String {
-        return when (this) {
+    override fun toString(): String =
+        when (this) {
             STATUS -> "status/"
             LEAGUES -> "leagues/"
             SEASONS -> "seasons/"
@@ -45,5 +45,4 @@ enum class EndpointEnum {
             TEAM_STATISTICS -> "teams/statistics/"
             PLAYER_STATISTICS -> "players/statistics/"
         }
-    }
 }

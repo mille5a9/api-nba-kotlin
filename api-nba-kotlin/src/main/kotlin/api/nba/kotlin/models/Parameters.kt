@@ -37,18 +37,19 @@ data class Parameters(
      *
      * @return the parameters map.
      */
-    fun getParams(): Map<String, Any?> = mapOf(
-        "id" to id,
-        "game" to game,
-        "season" to season,
-        "team" to team,
-        "league" to league,
-        "conference" to conference,
-        "division" to division,
-        "h2h" to h2h,
-        "date" to date,
-        "live" to live,
-        "country" to country,
-        "search" to search,
-    )
+    fun getParams(): Map<String, Any?> =
+        mapOf(
+            "id" to id,
+            "game" to game,
+            "season" to season,
+            "team" to team,
+            "league" to league,
+            "conference" to conference,
+            "division" to division,
+            "h2h" to h2h,
+            "date" to date,
+            "live" to live,
+            "country" to country,
+            "search" to search,
+        )
 }

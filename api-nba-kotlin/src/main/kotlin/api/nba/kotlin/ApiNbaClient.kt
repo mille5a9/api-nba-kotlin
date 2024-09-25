@@ -5,10 +5,10 @@ import api.nba.kotlin.enums.HostEnum
 import api.nba.kotlin.models.Parameters
 import api.nba.kotlin.responses.EndpointResponse
 import api.nba.kotlin.responses.GamesResponse
-import api.nba.kotlin.responses.PlayersResponse
-import api.nba.kotlin.responses.StandingsResponse
 import api.nba.kotlin.responses.GamesStatisticsResponse
+import api.nba.kotlin.responses.PlayersResponse
 import api.nba.kotlin.responses.PlayersStatisticsResponse
+import api.nba.kotlin.responses.StandingsResponse
 import api.nba.kotlin.responses.StatusResponse
 import api.nba.kotlin.responses.TeamsResponse
 import api.nba.kotlin.responses.TeamsStatisticsResponse
@@ -23,7 +23,6 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
 import io.ktor.serialization.gson.gson
-
 
 /**
  * Represents a client for accessing the NBA API to retrieve NBA-related data.
@@ -41,42 +40,42 @@ class ApiNbaClient(
         const val TOKEN_HEADER_KEY = "x-rapidapi-key"
     }
 
-    private val httpClient: HttpClient = HttpClient(httpClientEngine ?: CIO.create()) {
-        install(ContentNegotiation) { gson { setLenient() } }
-        install(HttpCache)
-    }
+    private val httpClient: HttpClient =
+        HttpClient(httpClientEngine ?: CIO.create()) {
+            install(ContentNegotiation) { gson { setLenient() } }
+            install(HttpCache)
+        }
 
     // Gets the Response from the API, where the 'response' property contains a list of T
     private suspend inline fun <reified T : Any> get(
         endpoint: EndpointEnum,
         params: Parameters? = null,
-    ) = httpClient.get {
-        url(host.toString() + endpoint)
-        params?.getParams()?.forEach { (k, v) -> parameter(k, v) }
-        header(TOKEN_HEADER_KEY, key)
-    }.body<EndpointResponse<T>>()
+    ) = httpClient
+        .get {
+            url(host.toString() + endpoint)
+            params?.getParams()?.forEach { (k, v) -> parameter(k, v) }
+            header(TOKEN_HEADER_KEY, key)
+        }.body<EndpointResponse<T>>()
 
     /**
      * Retrieves the account status by making a GET request to the API. Does not count against daily usage limits.
      *
      * @return the account status response.
      */
-    suspend fun getAccountStatus() = httpClient.get {
-        url(host.toString() + EndpointEnum.STATUS)
-        header(TOKEN_HEADER_KEY, key)
-    }.body<StatusResponse>()
+    suspend fun getAccountStatus() =
+        httpClient
+            .get {
+                url(host.toString() + EndpointEnum.STATUS)
+                header(TOKEN_HEADER_KEY, key)
+            }.body<StatusResponse>()
 
-    internal suspend fun getGames(params: Parameters) =
-        get<GamesResponse>(EndpointEnum.GAMES, params)
+    internal suspend fun getGames(params: Parameters) = get<GamesResponse>(EndpointEnum.GAMES, params)
 
-    internal suspend fun getTeams(params: Parameters) =
-        get<TeamsResponse>(EndpointEnum.TEAMS, params)
+    internal suspend fun getTeams(params: Parameters) = get<TeamsResponse>(EndpointEnum.TEAMS, params)
 
-    internal suspend fun getPlayers(params: Parameters) =
-        get<PlayersResponse>(EndpointEnum.PLAYERS, params)
+    internal suspend fun getPlayers(params: Parameters) = get<PlayersResponse>(EndpointEnum.PLAYERS, params)
 
-    internal suspend fun getStandings(params: Parameters) =
-        get<StandingsResponse>(EndpointEnum.STANDINGS, params)
+    internal suspend fun getStandings(params: Parameters) = get<StandingsResponse>(EndpointEnum.STANDINGS, params)
 
     internal suspend fun getPlayerStatistics(params: Parameters) =
         get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, params)
@@ -86,16 +85,14 @@ class ApiNbaClient(
      *
      * @return The list of seasons as an EndpointResponse<Int>.
      */
-    suspend fun getSeasons() =
-        get<Int>(EndpointEnum.SEASONS)
+    suspend fun getSeasons() = get<Int>(EndpointEnum.SEASONS)
 
     /**
      * Retrieves the list of leagues from the NBA API.
      *
      * @return The list of leagues as an EndpointResponse<String>.
      */
-    suspend fun getLeagues() =
-        get<String>(EndpointEnum.LEAGUES)
+    suspend fun getLeagues() = get<String>(EndpointEnum.LEAGUES)
 
     /**
      * Retrieves the game statistics for a specific game.
@@ -113,8 +110,10 @@ class ApiNbaClient(
      * @param season The season.
      * @return The team statistics response as an EndpointResponse<TeamsStatisticsResponse> object.
      */
-    suspend fun getTeamStatistics(teamId: Int, season: Int) =
-        get<TeamsStatisticsResponse>(EndpointEnum.TEAM_STATISTICS, Parameters(id = teamId, season = season))
+    suspend fun getTeamStatistics(
+        teamId: Int,
+        season: Int,
+    ) = get<TeamsStatisticsResponse>(EndpointEnum.TEAM_STATISTICS, Parameters(id = teamId, season = season))
 
     /**
      * Retrieves the game information for a specific game by its ID.
@@ -122,8 +121,7 @@ class ApiNbaClient(
      * @param gameId The ID of the game.
      * @return The game information as an EndpointResponse<GamesResponse> object.
      */
-    suspend fun getGameById(gameId: Int) =
-        get<GamesResponse>(EndpointEnum.GAMES, Parameters(id = gameId))
+    suspend fun getGameById(gameId: Int) = get<GamesResponse>(EndpointEnum.GAMES, Parameters(id = gameId))
 
     /**
      * Retrieves the games between two teams from the NBA API.
@@ -132,8 +130,10 @@ class ApiNbaClient(
      * @param teamId2 The ID of the second team.
      * @return The games between the two teams as an EndpointResponse<GamesResponse> object.
      */
-    suspend fun getGamesBetweenTwoTeams(teamId1: Int, teamId2: Int) =
-        get<GamesResponse>(EndpointEnum.GAMES, Parameters(h2h = "$teamId1-$teamId2"))
+    suspend fun getGamesBetweenTwoTeams(
+        teamId1: Int,
+        teamId2: Int,
+    ) = get<GamesResponse>(EndpointEnum.GAMES, Parameters(h2h = "$teamId1-$teamId2"))
 
     /**
      * Retrieves the live games from the NBA API.
@@ -150,8 +150,7 @@ class ApiNbaClient(
      * @param season The season for which to retrieve the games.
      * @return The list of games as an EndpointResponse<GamesResponse> object.
      */
-    suspend fun getGamesBySeason(season: Int) =
-        get<GamesResponse>(EndpointEnum.GAMES, Parameters(season = season))
+    suspend fun getGamesBySeason(season: Int) = get<GamesResponse>(EndpointEnum.GAMES, Parameters(season = season))
 
     /**
      * Retrieves the list of games for a specific date from the NBA API.
@@ -168,8 +167,10 @@ class ApiNbaClient(
      * @param season The season.
      * @return The games for the specified team and season as an EndpointResponse<GamesResponse> object.
      */
-    suspend fun getGamesByTeamAndSeason(teamId: Int, season: Int) =
-        get<GamesResponse>(EndpointEnum.GAMES, Parameters(team = teamId, season = season))
+    suspend fun getGamesByTeamAndSeason(
+        teamId: Int,
+        season: Int,
+    ) = get<GamesResponse>(EndpointEnum.GAMES, Parameters(team = teamId, season = season))
 
     /**
      * Retrieves the list of all NBA teams.
@@ -210,8 +211,7 @@ class ApiNbaClient(
      * @param code The code of the team.
      * @return The team information as an EndpointResponse<TeamsResponse> object.
      */
-    suspend fun getTeamByCode(code: String) =
-        get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(code = code))
+    suspend fun getTeamByCode(code: String) = get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(code = code))
 
     /**
      * Retrieves the list of players for a specific team and season from the NBA API.
@@ -220,8 +220,10 @@ class ApiNbaClient(
      * @param season The season.
      * @return The list of players for the specified team and season as an EndpointResponse<PlayersResponse> object.
      */
-    suspend fun getPlayersByTeamAndSeason(teamId: Int, season: Int) =
-        get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(team = teamId, season = season))
+    suspend fun getPlayersByTeamAndSeason(
+        teamId: Int,
+        season: Int,
+    ) = get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(team = teamId, season = season))
 
     /**
      * Retrieves the player information for a specific player by their ID.
@@ -229,8 +231,7 @@ class ApiNbaClient(
      * @param playerId The ID of the player.
      * @return The player information as an EndpointResponse<PlayersResponse> object.
      */
-    suspend fun getPlayerById(playerId: Int) =
-        get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(id = playerId))
+    suspend fun getPlayerById(playerId: Int) = get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(id = playerId))
 
     /**
      * Retrieves the list of players for a specific country from the NBA API.
@@ -248,8 +249,13 @@ class ApiNbaClient(
      * @param season The season.
      * @return The standings response as an EndpointResponse<StandingsResponse> object.
      */
-    suspend fun getStandingsByConferenceAndSeason(conference: String, season: Int) =
-        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(conference = conference, season = season, league = "standard"))
+    suspend fun getStandingsByConferenceAndSeason(
+        conference: String,
+        season: Int,
+    ) = get<StandingsResponse>(
+        EndpointEnum.STANDINGS,
+        Parameters(conference = conference, season = season, league = "standard"),
+    )
 
     /**
      * Retrieves the standings by division and season from the NBA API.
@@ -258,8 +264,13 @@ class ApiNbaClient(
      * @param season The season.
      * @return The standings response as an EndpointResponse<StandingsResponse> object.
      */
-    suspend fun getStandingsByDivisionAndSeason(division: String, season: Int) =
-        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(division = division, season = season, league = "standard"))
+    suspend fun getStandingsByDivisionAndSeason(
+        division: String,
+        season: Int,
+    ) = get<StandingsResponse>(
+        EndpointEnum.STANDINGS,
+        Parameters(division = division, season = season, league = "standard"),
+    )
 
     /**
      * Retrieves the standings for a specific team and season from the NBA API.
@@ -268,8 +279,10 @@ class ApiNbaClient(
      * @param season The season.
      * @return The standings response as an EndpointResponse<StandingsResponse> object.
      */
-    suspend fun getStandingsByTeamAndSeason(teamId: Int, season: Int) =
-        get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(team = teamId, season = season, league = "standard"))
+    suspend fun getStandingsByTeamAndSeason(
+        teamId: Int,
+        season: Int,
+    ) = get<StandingsResponse>(EndpointEnum.STANDINGS, Parameters(team = teamId, season = season, league = "standard"))
 
     /**
      * Retrieves the players statistics for a specific team and season from the NBA API.
@@ -278,8 +291,10 @@ class ApiNbaClient(
      * @param season The season.
      * @return The players statistics response as an EndpointResponse<PlayersStatisticsResponse> object.
      */
-    suspend fun getPlayersStatisticsByTeamAndSeason(teamId: Int, season: Int) =
-        get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, Parameters(team = teamId, season = season))
+    suspend fun getPlayersStatisticsByTeamAndSeason(
+        teamId: Int,
+        season: Int,
+    ) = get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, Parameters(team = teamId, season = season))
 
     /**
      * Retrieves the player statistics for a specific player and season from the NBA API.
@@ -288,8 +303,10 @@ class ApiNbaClient(
      * @param season The season.
      * @return The player statistics response as an EndpointResponse<PlayersStatisticsResponse> object.
      */
-    suspend fun getPlayerStatisticsByPlayerAndSeason(playerId: Int, season: Int) =
-        get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, Parameters(id = playerId, season = season))
+    suspend fun getPlayerStatisticsByPlayerAndSeason(
+        playerId: Int,
+        season: Int,
+    ) = get<PlayersStatisticsResponse>(EndpointEnum.PLAYER_STATISTICS, Parameters(id = playerId, season = season))
 
     /**
      * Retrieves the players statistics for a specific game.
@@ -306,8 +323,7 @@ class ApiNbaClient(
      * @param query The search query.
      * @return An instance of [EndpointResponse] containing a list of teams that match the search query.
      */
-    suspend fun searchTeams(query: String) =
-        get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(search = query))
+    suspend fun searchTeams(query: String) = get<TeamsResponse>(EndpointEnum.TEAMS, Parameters(search = query))
 
     /**
      * Suspended method that searches for players based on the provided query.
@@ -315,6 +331,5 @@ class ApiNbaClient(
      * @param query The search query.
      * @return An instance of [EndpointResponse] containing a list of players that match the search query.
      */
-    suspend fun searchPlayers(query: String) =
-        get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(search = query))
+    suspend fun searchPlayers(query: String) = get<PlayersResponse>(EndpointEnum.PLAYERS, Parameters(search = query))
 }
