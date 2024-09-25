@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class StandingsTest {
-
     private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: EndpointResponse<StandingsResponse> = EndpointResponse(
@@ -33,41 +32,41 @@ class StandingsTest {
                     "Atlanta Hawks",
                     "Hawks",
                     "ATL",
-                    "https://upload.wikimedia.org/wikipedia/fr/e/ee/Hawks_2016.png"
+                    "https://upload.wikimedia.org/wikipedia/fr/e/ee/Hawks_2016.png",
                 ),
                 StandingsResponse.Conference(
                     "east",
                     8,
                     26,
-                    26
+                    26,
                 ),
                 StandingsResponse.Division(
                     "southeast",
                     2,
                     9,
                     7,
-                    "10.0"
+                    "10.0",
                 ),
                 StandingsResponse.Record(
                     27,
                     16,
                     43,
                     ".524",
-                    7
+                    7,
                 ),
                 StandingsResponse.Record(
                     14,
                     25,
                     39,
                     ".476",
-                    3
+                    3,
                 ),
                 "10.0",
                 1,
                 true,
-                null
-            )
-        )
+                null,
+            ),
+        ),
     )
 
     @Test
@@ -77,7 +76,8 @@ class StandingsTest {
             "undefined",
             MockEngine { _ ->
                 respond(
-                    content = ByteReadChannel("""
+                    content = ByteReadChannel(
+                        """
 {
     "get": "standings/",
     "parameters": {
@@ -132,11 +132,12 @@ class StandingsTest {
         }
     ]
 }
-                    """.trimIndent()),
+                        """.trimIndent(),
+                    ),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
-            }
+            },
         )
         val response = apiNbaClient.getStandings(Parameters(league = "standard", season = 2021, team = 1))
         assertEquals(response, expected)

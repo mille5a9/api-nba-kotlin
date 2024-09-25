@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class AccountStatusTest {
-
     private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: StatusResponse = StatusResponse(
@@ -26,16 +25,16 @@ class AccountStatusTest {
             StatusResponse.Account(
                 firstname = "John",
                 lastname = "Smith",
-                email = "test@gmail.com"
+                email = "test@gmail.com",
             ),
             StatusResponse.Subscription(
                 plan = "Free",
                 end = "2024-12-20T00:00:00+00:00",
-                active = true
+                active = true,
             ),
             StatusResponse.Requests(
                 current = 0,
-                limitDay = 100
+                limitDay = 100,
             ),
         ),
     )
@@ -47,13 +46,15 @@ class AccountStatusTest {
             "undefined",
             MockEngine { _ ->
                 respond(
-                    content = ByteReadChannel("""
+                    content = ByteReadChannel(
+                        """
                         {"get":"status","parameters":[],"errors":[],"results":0,"paging":{"current":1,"total":1},"response":{"account":{"firstname":"John","lastname":"Smith","email":"test@gmail.com"},"subscription":{"plan":"Free","end":"2024-12-20T00:00:00+00:00","active":true},"requests":{"current":0,"limit_day":100}}}
-                    """.trimIndent()),
+                        """.trimIndent(),
+                    ),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
-            }
+            },
         )
         val response = apiNbaClient.getAccountStatus()
         assertEquals(response, expected)

@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class PlayerStatisticsTest {
-
     private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: EndpointResponse<PlayersStatisticsResponse> = EndpointResponse(
@@ -29,17 +28,17 @@ class PlayerStatisticsTest {
                 PlayersStatisticsResponse.Player(
                     236,
                     "Buddy",
-                    "Hield"
+                    "Hield",
                 ),
                 Team(
                     30,
                     "Sacramento Kings",
                     "Kings",
                     "SAC",
-                    "https://upload.wikimedia.org/wikipedia/fr/thumb/9/95/Kings_de_Sacramento_logo.svg/1200px-Kings_de_Sacramento_logo.svg.png"
+                    "https://upload.wikimedia.org/wikipedia/fr/thumb/9/95/Kings_de_Sacramento_logo.svg/1200px-Kings_de_Sacramento_logo.svg.png",
                 ),
                 PlayersStatisticsResponse.Game(
-                    8137
+                    8137,
                 ),
                 23,
                 "SG",
@@ -62,9 +61,9 @@ class PlayerStatisticsTest {
                 0,
                 0,
                 "-14",
-                null
-            )
-        )
+                null,
+            ),
+        ),
     )
 
     @Test
@@ -74,7 +73,8 @@ class PlayerStatisticsTest {
             "undefined",
             MockEngine { _ ->
                 respond(
-                    content = ByteReadChannel("""
+                    content = ByteReadChannel(
+                        """
 {
     "get": "players/statistics",
     "parameters": {
@@ -126,14 +126,15 @@ class PlayerStatisticsTest {
         }
     ]
 }
-                    """.trimIndent()),
+                        """.trimIndent(),
+                    ),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
-            }
+            },
         )
         val response = apiNbaClient.getPlayerStatistics(
-            Parameters(id = 236, game = 8137, season = 2020)
+            Parameters(id = 236, game = 8137, season = 2020),
         )
         assertEquals(response, expected)
     }

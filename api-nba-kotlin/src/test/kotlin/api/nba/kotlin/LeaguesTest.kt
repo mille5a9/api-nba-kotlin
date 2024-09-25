@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class LeaguesTest {
-
     private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: EndpointResponse<String> = EndpointResponse(
@@ -21,7 +20,7 @@ class LeaguesTest {
         emptyMap(),
         emptyList(),
         6,
-        listOf("africa","orlando","sacramento","standard","utah","vegas")
+        listOf("africa", "orlando", "sacramento", "standard", "utah", "vegas"),
     )
 
     @Test
@@ -31,13 +30,15 @@ class LeaguesTest {
             "undefined",
             MockEngine { _ ->
                 respond(
-                    content = ByteReadChannel("""
+                    content = ByteReadChannel(
+                        """
                         {"get":"leagues/","parameters":[],"errors":[],"results":6,"response":["africa","orlando","sacramento","standard","utah","vegas"]}
-                    """.trimIndent()),
+                        """.trimIndent(),
+                    ),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
-            }
+            },
         )
         val response = apiNbaClient.getLeagues()
         assertEquals(response, expected)

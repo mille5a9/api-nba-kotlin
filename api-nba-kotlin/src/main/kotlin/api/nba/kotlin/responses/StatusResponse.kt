@@ -20,7 +20,6 @@ data class StatusResponse(
     val paging: Map<String, Int>,
     val response: Response,
 ) {
-
     /**
      * Represents the response received from the API, containing information about the account, subscription, and requests.
      *

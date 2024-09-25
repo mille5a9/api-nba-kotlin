@@ -34,7 +34,7 @@ data class GamesStatisticsResponse(
      * @property turnovers The number of turnovers.
      * @property blocks The number of blocks.
      * @property plusMinus The plus/minus of the team.
-    */
+*/
     data class GameStatistics(
         val fastBreakPoints: Int,
         val pointsInPaint: Int,

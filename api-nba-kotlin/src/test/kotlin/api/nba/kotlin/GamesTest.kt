@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class GamesTest {
-
     private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: EndpointResponse<GamesResponse> = EndpointResponse(
@@ -32,25 +31,25 @@ class GamesTest {
                 GamesResponse.Date(
                     "2022-02-12T00:00:00.000Z",
                     "2022-02-12T02:27:00.000Z",
-                    "2:17"
+                    "2:17",
                 ),
                 2,
                 GamesResponse.Status(
                     null,
                     false,
                     3,
-                    "Finished"
+                    "Finished",
                 ),
                 GamesResponse.Periods(
                     4,
                     4,
-                    false
+                    false,
                 ),
                 GamesResponse.Arena(
                     "Gainbridge Fieldhouse",
                     "Indianapolis",
                     "IN",
-                    "USA"
+                    "USA",
                 ),
                 GamesResponse.Teams(
                     Team(
@@ -58,15 +57,15 @@ class GamesTest {
                         "Cleveland Cavaliers",
                         "Cavaliers",
                         "CLE",
-                        "https://upload.wikimedia.org/wikipedia/fr/thumb/0/06/Cavs_de_Cleveland_logo_2017.png/150px-Cavs_de_Cleveland_logo_2017.png"
+                        "https://upload.wikimedia.org/wikipedia/fr/thumb/0/06/Cavs_de_Cleveland_logo_2017.png/150px-Cavs_de_Cleveland_logo_2017.png",
                     ),
                     Team(
                         15,
                         "Indiana Pacers",
                         "Pacers",
                         "IND",
-                        "https://upload.wikimedia.org/wikipedia/fr/thumb/c/cf/Pacers_de_l%27Indiana_logo.svg/1180px-Pacers_de_l%27Indiana_logo.svg.png"
-                    )
+                        "https://upload.wikimedia.org/wikipedia/fr/thumb/c/cf/Pacers_de_l%27Indiana_logo.svg/1180px-Pacers_de_l%27Indiana_logo.svg.png",
+                    ),
                 ),
                 GamesResponse.Scores(
                     GamesResponse.Score(
@@ -74,42 +73,42 @@ class GamesTest {
                         21,
                         GamesResponse.Series(
                             3,
-                            0
+                            0,
                         ),
                         listOf(
                             "28",
                             "35",
                             "25",
-                            "32"
+                            "32",
                         ),
-                        120
+                        120,
                     ),
                     GamesResponse.Score(
                         19,
                         38,
                         GamesResponse.Series(
                             0,
-                            3
+                            3,
                         ),
                         listOf(
                             "47",
                             "27",
                             "22",
-                            "17"
+                            "17",
                         ),
-                        113
-                    )
+                        113,
+                    ),
                 ),
                 listOf(
                     "Ben Taylor",
                     "Dedric Taylor",
-                    "Suyash Mehta"
+                    "Suyash Mehta",
                 ),
                 2,
                 7,
-                null
-            )
-        )
+                null,
+            ),
+        ),
     )
 
     @Test
@@ -119,7 +118,8 @@ class GamesTest {
             "undefined",
             MockEngine { _ ->
                 respond(
-                    content = ByteReadChannel("""
+                    content = ByteReadChannel(
+                        """
 {
     "get": "games/",
     "parameters": {
@@ -214,11 +214,12 @@ class GamesTest {
         }
     ]
 }
-                    """.trimIndent()),
+                        """.trimIndent(),
+                    ),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
-            }
+            },
         )
         val response = apiNbaClient.getGames(Parameters(id = 10404))
         assertEquals(response, expected)

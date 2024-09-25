@@ -64,12 +64,18 @@ data class PlayersStatisticsResponse(
      * @property firstname The firstname of the player.
      * @property lastname The lastname of the player.
      */
-    data class Player(val id: Int, val firstname: String, val lastname: String)
+    data class Player(
+        val id: Int,
+        val firstname: String,
+        val lastname: String,
+    )
 
     /**
      * Represents a game in the NBA.
      *
      * @property id The unique identifier of the game.
      */
-    data class Game(val id: Int)
+    data class Game(
+        val id: Int,
+    )
 }

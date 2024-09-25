@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class PlayersTest {
-
     private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: EndpointResponse<PlayersResponse> = EndpointResponse(
@@ -41,9 +40,9 @@ class PlayersTest {
                     vegas = null,
                     utah = null,
                     orlando = null,
-                )
-            )
-        )
+                ),
+            ),
+        ),
     )
 
     @Test
@@ -53,7 +52,8 @@ class PlayersTest {
             "undefined",
             MockEngine { _ ->
                 respond(
-                    content = ByteReadChannel("""
+                    content = ByteReadChannel(
+                        """
 {
     "get": "players/",
     "parameters": {
@@ -95,11 +95,12 @@ class PlayersTest {
         }
     ]
 }
-                    """.trimIndent()),
+                        """.trimIndent(),
+                    ),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
-            }
+            },
         )
         val response = apiNbaClient.getPlayers(Parameters(id = 553))
         assertEquals(response, expected)

@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class GameStatisticsTest {
-
     private lateinit var apiNbaClient: ApiNbaClient
 
     private val expected: EndpointResponse<GamesStatisticsResponse> = EndpointResponse(
@@ -30,7 +29,7 @@ class GameStatisticsTest {
                     "Charlotte Hornets",
                     "Hornets",
                     "CHA",
-                    "https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png"
+                    "https://upload.wikimedia.org/wikipedia/fr/thumb/f/f3/Hornets_de_Charlotte_logo.svg/1200px-Hornets_de_Charlotte_logo.svg.png",
                 ),
                 listOf(
                     GamesStatisticsResponse.GameStatistics(
@@ -59,9 +58,9 @@ class GameStatisticsTest {
                         18,
                         2,
                         "22",
-                        "240:00"
-                    )
-                )
+                        "240:00",
+                    ),
+                ),
             ),
             GamesStatisticsResponse(
                 Team(
@@ -69,7 +68,7 @@ class GameStatisticsTest {
                     "Detroit Pistons",
                     "Pistons",
                     "DET",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_of_the_Detroit_Pistons.png/300px-Logo_of_the_Detroit_Pistons.png"
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_of_the_Detroit_Pistons.png/300px-Logo_of_the_Detroit_Pistons.png",
                 ),
                 listOf(
                     GamesStatisticsResponse.GameStatistics(
@@ -98,11 +97,11 @@ class GameStatisticsTest {
                         18,
                         6,
                         "-22",
-                        "240:00"
-                    )
-                )
-            )
-        )
+                        "240:00",
+                    ),
+                ),
+            ),
+        ),
     )
 
     @Test
@@ -112,7 +111,8 @@ class GameStatisticsTest {
             "undefined",
             MockEngine { _ ->
                 respond(
-                    content = ByteReadChannel("""
+                    content = ByteReadChannel(
+                        """
 {
     "get": "games/statistics",
     "parameters": {
@@ -201,11 +201,12 @@ class GameStatisticsTest {
         }
     ]
 }
-                    """.trimIndent()),
+                        """.trimIndent(),
+                    ),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
-            }
+            },
         )
         val response = apiNbaClient.getGameStatistics(10403)
         assertEquals(response, expected)

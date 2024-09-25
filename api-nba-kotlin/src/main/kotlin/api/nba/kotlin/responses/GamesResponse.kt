@@ -34,9 +34,8 @@ data class GamesResponse(
     val officials: List<String>,
     val timesTied: Int?,
     val leadChanges: Int?,
-    val nugget: String?
+    val nugget: String?,
 ) {
-
     /**
      * Represents a date with start and end timestamps and duration.
      *
