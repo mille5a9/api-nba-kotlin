@@ -7,6 +7,7 @@ plugins {
 val projectGroup: String by project
 val projectVersion: String by project
 val ktorVersion: String by project
+val kotlinVersion: String by project
 
 group = projectGroup
 version = projectVersion
@@ -22,5 +23,22 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
 
+    testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
+}
+
+testing {
+    suites {
+        @Suppress("UnstableApiUsage") val test by getting(JvmTestSuite::class) {
+            useKotlinTest(kotlinVersion)
+        }
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+kotlin {
+    jvmToolchain(17)
 }
