@@ -1,5 +1,7 @@
 package api.nba.kotlin.models
 
+import com.faendir.kotlin.autodsl.AutoDsl
+
 /**
  * Represents the parameters for making API requests.
  *
@@ -17,6 +19,7 @@ package api.nba.kotlin.models
  * @property country The country parameter.
  * @property search The search parameter.
  */
+@AutoDsl
 data class Parameters(
     private val id: Int? = null,
     private val game: Int? = null,
