@@ -1,5 +1,3 @@
-package api.nba.kotlin.responses
-
 import com.google.gson.annotations.SerializedName
 
 /**

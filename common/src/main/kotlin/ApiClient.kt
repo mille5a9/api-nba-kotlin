@@ -11,7 +11,8 @@ import io.ktor.client.request.url
 import io.ktor.serialization.gson.gson
 
 open class ApiClient(
-    protected val host: String,
+    protected val host: HostsEnum,
+    protected val hostKey: HostKeysEnum,
     protected val key: String,
     httpClientEngine: HttpClientEngine? = null,
 ) {
@@ -30,8 +31,19 @@ open class ApiClient(
         params: IParameters? = null,
     ) = httpClient
         .get {
-            url(host + endpoint)
+            url(host.url(hostKey) + endpoint)
             params?.getParams()?.forEach { (k, v) -> parameter(k, v) }
             header(TOKEN_HEADER_KEY, key)
         }.body<EndpointResponse<T>>()
+
+    /**
+     * Retrieves the account status by making a GET request to the API. Does not count against daily usage limits.
+     *
+     * @return the account status response.
+     */
+    suspend fun getAccountStatus() = httpClient
+        .get {
+            url(host.url(hostKey) + "status/")
+            header(TOKEN_HEADER_KEY, key)
+        }.body<StatusResponse>()
 }

@@ -2,22 +2,17 @@ package api.nba.kotlin
 
 import ApiClient
 import EndpointResponse
+import HostsEnum
 import api.nba.kotlin.enums.EndpointEnum
-import api.nba.kotlin.enums.HostEnum
 import api.nba.kotlin.models.NbaParameters
 import api.nba.kotlin.responses.GamesResponse
 import api.nba.kotlin.responses.GamesStatisticsResponse
 import api.nba.kotlin.responses.PlayersResponse
 import api.nba.kotlin.responses.PlayersStatisticsResponse
 import api.nba.kotlin.responses.StandingsResponse
-import api.nba.kotlin.responses.StatusResponse
 import api.nba.kotlin.responses.TeamsResponse
 import api.nba.kotlin.responses.TeamsStatisticsResponse
-import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.request.get
-import io.ktor.client.request.header
-import io.ktor.client.request.url
 
 /**
  * Represents a client for accessing the NBA API to retrieve NBA-related data.
@@ -28,21 +23,10 @@ import io.ktor.client.request.url
  */
 @Suppress("unused")
 class ApiNbaClient(
-    host: HostEnum,
+    host: HostsEnum,
     key: String,
     private val httpClientEngine: HttpClientEngine? = null,
-) : ApiClient(host.toString(), key, httpClientEngine) {
-    /**
-     * Retrieves the account status by making a GET request to the API. Does not count against daily usage limits.
-     *
-     * @return the account status response.
-     */
-    suspend fun getAccountStatus() = httpClient
-        .get {
-            url(host + EndpointEnum.STATUS)
-            header(TOKEN_HEADER_KEY, key)
-        }.body<StatusResponse>()
-
+) : ApiClient(host, HostKeysEnum.NBA, key, httpClientEngine) {
     internal suspend fun getGames(params: NbaParameters) =
         get<GamesResponse>(EndpointEnum.GAMES, params)
 
