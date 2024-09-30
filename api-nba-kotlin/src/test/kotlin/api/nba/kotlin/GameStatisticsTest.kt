@@ -2,7 +2,7 @@ package api.nba.kotlin
 
 import api.nba.kotlin.enums.HostEnum
 import api.nba.kotlin.models.Team
-import api.nba.kotlin.responses.EndpointResponse
+import EndpointResponse
 import api.nba.kotlin.responses.GamesStatisticsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond

@@ -1,9 +1,9 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.enums.HostEnum
-import api.nba.kotlin.models.Parameters
+import api.nba.kotlin.models.NbaParameters
 import api.nba.kotlin.models.Team
-import api.nba.kotlin.responses.EndpointResponse
+import EndpointResponse
 import api.nba.kotlin.responses.StandingsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -139,7 +139,7 @@ class StandingsTest {
                 )
             },
         )
-        val response = apiNbaClient.getStandings(Parameters(league = "standard", season = 2021, team = 1))
+        val response = apiNbaClient.getStandings(NbaParameters(league = "standard", season = 2021, team = 1))
         assertEquals(response, expected)
     }
 }

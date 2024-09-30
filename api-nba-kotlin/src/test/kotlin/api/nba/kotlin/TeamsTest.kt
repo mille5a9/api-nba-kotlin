@@ -1,8 +1,8 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.enums.HostEnum
-import api.nba.kotlin.models.Parameters
-import api.nba.kotlin.responses.EndpointResponse
+import api.nba.kotlin.models.NbaParameters
+import EndpointResponse
 import api.nba.kotlin.responses.TeamsResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -61,7 +61,7 @@ class TeamsTest {
                 )
             },
         )
-        val response = apiNbaClient.getTeams(Parameters(id = 1))
+        val response = apiNbaClient.getTeams(NbaParameters(id = 1))
         assertEquals(response, expected)
     }
 }

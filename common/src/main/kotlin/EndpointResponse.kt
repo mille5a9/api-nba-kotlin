@@ -1,5 +1,3 @@
-package api.nba.kotlin.responses
-
 /**
  * Represents the response returned from an API endpoint.
  *

@@ -1,5 +1,7 @@
 package api.nba.kotlin.enums
 
+import IEndpointEnum
+
 /**
  * Represents an enumeration of endpoints for an NBA API.
  *
@@ -14,7 +16,7 @@ package api.nba.kotlin.enums
  * @property TEAM_STATISTICS Represents the endpoint for retrieving team statistics.
  * @property PLAYER_STATISTICS Represents the endpoint for retrieving player statistics.
  */
-enum class EndpointEnum {
+enum class EndpointEnum : IEndpointEnum {
     STATUS,
     LEAGUES,
     SEASONS,

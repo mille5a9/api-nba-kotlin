@@ -1,7 +1,7 @@
 package api.nba.kotlin
 
 import api.nba.kotlin.enums.HostEnum
-import api.nba.kotlin.responses.EndpointResponse
+import EndpointResponse
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders

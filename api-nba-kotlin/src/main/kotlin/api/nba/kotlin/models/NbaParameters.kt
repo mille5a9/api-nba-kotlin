@@ -1,5 +1,6 @@
 package api.nba.kotlin.models
 
+import IParameters
 import com.faendir.kotlin.autodsl.AutoDsl
 
 /**
@@ -20,7 +21,7 @@ import com.faendir.kotlin.autodsl.AutoDsl
  * @property search The search parameter.
  */
 @AutoDsl
-data class Parameters(
+data class NbaParameters(
     private val id: Int? = null,
     private val game: Int? = null,
     private val season: Int? = null,
@@ -34,13 +35,13 @@ data class Parameters(
     private val live: String? = null,
     private val country: String? = null,
     private val search: String? = null,
-) {
+) : IParameters {
     /**
      * Returns the parameters as a map.
      *
      * @return the parameters map.
      */
-    fun getParams(): Map<String, Any?> =
+    override fun getParams(): Map<String, Any?> =
         mapOf(
             "id" to id,
             "game" to game,
